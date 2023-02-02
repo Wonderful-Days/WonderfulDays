@@ -10,35 +10,7 @@ $baby-blue: #f8faff; */
     z-index: 10;
 }
 
-/* .button-63 {
-  align-items: center;
-  background: linear-gradient(to bottom, #6600ff 90%, #cc0099 100%);
-  border: 0;
-  border-radius: 8px;
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  display: flex;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 10px;
-  justify-content: center;
-  line-height: 1em;
-  max-width: 100%;
-  min-width: 100px;
-  padding: 10px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  cursor: pointer;
-}
 
-.button-63:active,
-.button-63:hover {
-  outline: 0;
-}
- */
 @media (min-width: 768px) {
   .button-63 {
     font-size: 24px;
@@ -48,16 +20,7 @@ $baby-blue: #f8faff; */
 
 
 .navbar{
-    /* background-image: linear-gradient(to right,#a517ba,#5f1782); */
-    /* background:  #33ccff; */
-    /* background-color: #D9AFD9;
-    background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%); */
-    /* background: linear-gradient(to bottom, #6600ff 0%, #cc0099 100%); */
-    /* background: linear-gradient(to bottom, #9900ff 0%, #cc0099 100%); */
-    /* background-color: #00DBDE;
-background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%); */
-/* background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%); */
-/* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+   
     padding: 10px;
     background-color: white;
 }
@@ -72,16 +35,9 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%); */
 }
 /* BANNER SECTION */
 #banner{
-    /* background-image: linear-gradient(to right,#a517ba,#5f1782); */
-    /* background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%); */
-    /* background-color: #D9AFD9;
-    background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%); */
+    
     background: linear-gradient(to bottom, #6600ff 0%, #cc0099 100%);
-    /* background: linear-gradient(to bottom, #9900ff 0%, #cc0099 100%); */
-    /* background-color: #00DBDE;
-background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%); */
-/* background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%); */
-/* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+    
     color: white;
     padding-top: 5%;
 }
@@ -115,11 +71,7 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%); */
 }
 
 
-/* .dropdown-item:hover{
-  background-color:  #D3D3D3;
-}    another idea */
 
-/*Hover effet to nav bar */
 
 .nav-link-animation {
   display: inline-block;
@@ -276,64 +228,6 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%); */
 
 
 
-/* .footer{
-  background:#333;
-}
-
-.footer .box-container{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.footer .box-container .box{
-  margin:1.5rem;
-  text-align: center;
-  flex:1 1 25rem;
-}
-
-.footer .box-container .box h3{
-  font-size: 1.5rem;
-  color:#fff;
-  padding:1rem 0;
-}
-
-.footer .box-container .box p{
-  font-size: 1.7rem;
-  color:#eee;
-  padding:.7rem 0;
-}
-
-.footer .box-container .box p i{
-  padding-right: .5rem;
-  color:#f39c12;
-}
-
-.footer .box-container .box a{
-  font-size: 1rem;
-  display: block;
-  padding:.5rem 0;
-  color:#eee;
-}
-
-.footer .box-container .box a:hover{
-  text-decoration: underline;
-}
-
-.footer .credit{
-  padding:2rem 1rem;
-  font-size: 2rem;
-  color:#fff;
-  background:#111;
-  text-align: center;
-  font-weight: normal;
-  padding-bottom: 9rem;
-}
-
-.footer .credit a{
-  color:#f39c12
-}
-*/
 
 
 footer{
