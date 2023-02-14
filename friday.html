@@ -96,6 +96,52 @@
       box-shadow: 20px 20px 200px rgb(170, 170, 170);
       transform: scale(1.03);
     }
+    
+    .waviy {
+  position: relative;
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+
+ 
+  text-transform: uppercase;
+  animation: flip 5s ;
+  animation-delay: calc(.2s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+   .animate-charcter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #f8ad22 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear ;
+  display: inline-block;
+     
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
   </style>
 
   <body>
@@ -227,7 +273,7 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-img">
-              <h2>
+              <h2 class="animate-charcter">
                 "A Day for Growth and Collaboration, Nurturing Agriculture, Nurturing Our Future on Friday"
               </h2>
               <div class="btn-c">
@@ -251,7 +297,17 @@
     <!--About section start  -->
 
     <section class="content">
-      <h2 class="heading">About Event</h2>
+      <h2 class="heading"><div class="waviy">
+        <span style="--i:1">A</span>
+        <span style="--i:2">b</span>
+        <span style="--i:3">o</span>
+        <span style="--i:4">u</span>
+        <span style="--i:5">t</span>
+        <span style="--i:8"> </span>
+        <span style="--i:6">U</span>
+        <span style="--i:7">s</span>
+       
+       </div></h2>
       <h3 class="text-center text">Farming Friday</h3>
       <div class="para">
         <p>
