@@ -17,123 +17,110 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-    crossorigin="anonymous"/>
-
-    
-    
+    crossorigin="anonymous"
+  />
     <link rel="stylesheet" href="style.css">
-
-    <title>Mooney Monday</title>
-  </head>
-  <style>
-    
-    .banner{
-      background-image: linear-gradient( 20deg, #00b7ff,
-      #40E0D0);
-    }   
-    .row{
-      justify-content: space-between;
-      
-    }
-    .text-img{
-      padding-left: 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    <!-- .main{
-      padding-left: 50px;
-    } -->
-    .img{
-      height:60vh;
-      width: auto;
-      padding-left: 30px;
-      border-radius:50px;
-    }
-    .btn-c{
-      align-items: center;
-      padding-top: 20px;
-      padding-left: -100px;
-    }
-    .btn{
-        background-color: #fe399c;
-        border-radius: 10px;
-        margin-right:90px;
-        font-size: 1.2rem;
-        
-    }
-    .btn:hover{
-        background-color: #fe399c;
-    }
-    .btn a{
-        color: white;
-        text-decoration: none;
-    }
-    
-    .content{
-       
-      margin: 50px;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    .heading{
-      padding-bottom: 30px;
-    }
-    .text{
-       font-size: 3em;
-    }
-    .para{
-      padding-top: 30px;
-     }
-    .waviy {
+    <title>About Us</title>
+    <style>
+        .container {
   position: relative;
+  width: 1160px;
+  display: flex;
+  /* justify-content: center; */
+  flex-wrap: wrap;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  margin: auto;
 }
-.waviy span {
+.container .box {
   position: relative;
-  display: inline-block;
-
- 
-  text-transform: uppercase;
-  animation: flip 5s ;
-  animation-delay: calc(.2s * var(--i))
+  width: 275px;
+  height: 275px;
+  background: #000;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  margin-right: 15px;
+  margin-top: 45px;
 }
-@keyframes flip {
-  0%,80% {
-    transform: rotateY(360deg) 
-  }
+/* .container:hover .box {
+  transform: rotateY(25deg);
+} */
+.container .box:hover ~ .box {
+  transform: rotateY(-25deg);
 }
-   .animate-charcter
-{
-   text-transform: uppercase;
-  background-image: linear-gradient(
-    -225deg,
-    #231557 0%,
-    #44107a 29%,
-    #ff1361 67%,
-    #f8ad22 100%
-  );
-  background-size: auto auto;
-  background-clip: border-box;
-  background-size: 200% auto;
+.container .box:hover {
+  transform: rotateY(0deg) scale(1.25);
+  /* z-index: 1; */
+  box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+}
+.container .box .imgBx {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.container .box .imgBx:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg,rgb(184, 175, 175),#000);
+  z-index: 1;
+  opacity: 0;
+  transition: 0.5s;
+  mix-blend-mode: multiply;
+}
+.container .box:hover .imgBx:before {
+  opacity: 1;
+}
+.container .box .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.container .box .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  padding: 20px;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+.container .box .content h2 {
   color: #fff;
-  background-clip: text;
-  text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textclip 5s linear ;
-  display: inline-block;
-     
+  transition: 0.5s;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-size: 20px;
+  transform: translateY(200px);
+  transition-delay: 0.3s;
 }
-
-@keyframes textclip {
-  to {
-    background-position: 200% center;
-  }
+.container .box:hover .content h2 {
+  transform: translateY(0px);
 }
-    
-
-  </style>
-
+.container .box .content p {
+  color: #fff;
+  transition: 0.5s;
+  font-size: 14px;
+  transform: translateY(200px);
+  transition-delay: 0.4s;
+}
+.container .box:hover .content p {
+  transform: translateY(0px);
+}
+    </style>
+  </head>
   <body>
     <!-- HEADER SECTION -->
     <section id="nav-bar">
@@ -160,14 +147,14 @@
                     <a class="dropdown-item" href="tuesday.html">Teachers Tuesday</a>
                     <a class="dropdown-item" href="wendnesday.html">Wonderful Wednesday</a>
                     <a class="dropdown-item" href="thursday.html">Teaming Thursday</a>
-                    <a class="dropdown-item" href="fridays.html">Farming Friday</a>
+                    <a class="dropdown-item" href="friday.html">Farming Friday</a>
                     <a class="dropdown-item" href="saturday.html">Startup Saturday</a>
                   </div>
                   
                 </li>
               
                 <li class="nav-item act" >
-                  <a class="nav-link" style="color:black" href="#"> 
+                  <a class="nav-link" style="color:black" href="review.html"> 
                     <img src="images/review)logo.png"
                     width="24"
                     height="24"
@@ -204,203 +191,105 @@
             </div>
           </nav>
     </section>
-<!-- Header section End -->
+<!--BreadCrum Section Start-->
 
-<!-- Banner section start -->
-<section class="banner">
-<!--Breadcrumbs Section Start-->
 <section class="breadcrumbs-section">
     <div class="container pl-3 p-sm-3">
-      <div class="row">
+      <div class="row jus">
         <div class="col-12">
           <!--<h2>Contact Us</h2>-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active">Mooney Monday</li>
+            <li class="breadcrumb-item active">About US</li>
           </ol>
         </div>
       </div>
     </div>
   </section>
-  <!--Breadcrum section End-->
-  <section class="p-2 pt-md-4 pb-md-4">
-    <div class="container ">
-      <div class="row align-items-center ">
-        <div class="col-md-6 text-img">
-        
-          <h2  class="animate-charcter">"Embrace the beauty of language, The rhythm of life, Discover new perspectives through the art of poetry."
-        </h2>
-        <div class="btn-c">
-          <button class="btn "><a href="#">Register for Event</a></button>
-        </div> 
+<!--Breadcrum Section End-->
+
+    <!--Landing Page Start-->
+    <div class="container my-5 z-depth-1">
+
+        <!--Section: Content-->
+        <section class="p-2 pt-md-4 pb-md-4">
+            <div class="container text-center">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <h2>About Wonderful Days</h2>
+                  <br>
+                  <p>At WonderfulDays, we believe that 
+                    every day should be an opportunity to create lifelong memories, and we're 
+                    dedicated to making that a reality for our clientsAs an event planning company 
+                    that hosts daily events, we're 
+                     dedicated to providing unique and memorable experiences every day of the week.
+                      From Monday to Sunday, we offer a wide range of events that cater to a variety 
+                      of interests. Our commitment to quality and creativity 
+                      has helped us establish a reputation as a leading event planning company, 
+                      and we're proud to offer a diverse range of events that cater to all tastes
+                       and preferences.</p>
+                    <br> 
+                  <button class="btn btn-primary">Read more</button>
+                </div>
+                <div class="col-md-6">
+                  <img class="img-fluid p-3" src="images/girlGIF.gif" alt="">
+                </div>
+              </div>
+            </div>
+          </section>
+        <!--Section: Content-->   
+      </div>
+    <!--Landing Page End-->
+
+
+    <!--Our Team Section Start-->
+    <div class="container">
+        <h2 class="text-center">We have Awesome Team</h2>
+    </div>
+    <div class="container justify-content-around">
+        <div class="box" style="padding-right: 30px;">
+          <div class="imgBx">
+            <img src="images/avikulkarni.png">
+          </div>
+          <div class="content">
+            <div>
+              <h2>Avinash Kulkarni</h2>
+              <p>Founder & CEO -Smart Cookie. <br>+1 973 551 5593
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 text-img">
-          <img class="img-fluid p-3 img-responsive img" src="images/Mooney Monday.png" alt="">
+        <div class="box">
+          <div class="imgBx">
+            <img src="images/rakeshkhatri.png">
         </div>
+          <div class="content">
+            <div>
+              <h2>Rakesh Khatri</h2>
+              <p>CTO - Smart Cookie<br> +91 996 090 3132
+              </p>
+            </div>
+          </div>
+        </div>     
       </div>
-    </div>
-        </section>
-</section>
-    <!--Banner section end  -->
-    <!--About section start  -->
-    
-<section class="content">
-  <h2 class="heading"><div class="waviy">
-        <span style="--i:1">A</span>
-        <span style="--i:2">b</span>
-        <span style="--i:3">o</span>
-        <span style="--i:4">u</span>
-        <span style="--i:5">t</span>
-        <span style="--i:8"> </span>
-        <span style="--i:6">U</span>
-        <span style="--i:7">s</span>
-       
-       </div></h2>
-  <h3 class="text-center text"> Mooney Monday</h3>
- <div class="para">
-  <p> Mooney Monday is a celebration of poetry and all things poetic. On this day, individuals who have a passion for poetry come together to share their work and connect with others who share their love for verse. Whether you are an established poet or just starting out, Mooney Monday provides a platform for you to share your work and have it appreciated by a supportive community.
-  </p>
-  <p>The purpose of Mooney Monday is to promote the art of poetry and its many forms. It is a chance for people to come together and share their love for words, rhythm, and rhyme. Participants can read their original poems, share their favorite works by other poets, or simply listen and appreciate the power of poetry.
-   </p>   
-  <p>Mooney Monday provides an opportunity for individuals to learn about new poets and styles of poetry, and to gain a deeper understanding of the craft. Whether you are an experienced poet or just starting to explore your passion for verse, Mooney Monday offers a supportive and encouraging community where you can grow and develop your skills.
-  </p>
-  <p>So if you are a lover of poetry, make sure to join us on Mooney Monday to celebrate this timeless art form and to connect with others who share your passion. Let us come together to share our love for words, our thoughts, and our stories.
-</p>
- </div>
- <div class="btn-c">
-  <button class="btn "><a href="#">Register for Event</a></button>
-</div>
-</section>
+    <!--Out TEam Esction End-->
 
 
-<!-- about more event -->
 
-  <!-- Review section start -->
-  <h2 class="text-center">What our participants says about us</h2>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
-    <ol class="carousel-indicators ">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active dash"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1" class="dash"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2" class="dash"></li>
-    </ol>
-    <div class="carousel-inner ">
-      <div class="carousel-item active text-center">
-        <img src="images/user2.jpg" width="30%" height="300px" class="bd-placeholder-img " alt="">
-        <h2>John Cena</h2>
-        <p >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
-       
-      </div>
-      <div class="carousel-item text-center">
-        <img src="images/user1.jpg" width="30%" height="300px" class="bd-placeholder-img " alt="">
-        <h2>John Cena</h2>
-        <p >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
-        
-      </div>
-      <div class="carousel-item text-center">
-        <img src="images/user1.jpg" width="30%" height="300px" class="bd-placeholder-img " alt="">
-        <h2>John Cena</h2>
-        <p >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
-        
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
-      <span class="carousel-control-prev-icon " aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
-      <span class="carousel-control-next-icon " aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </button>
-  </div>
-  
-    
-  
-  <!-- Review section end-->  
- <!--Our More Progeam Start-->
-<section class="pt-3 pb-4">
-  <div class="container">
-    <div class="row mt-4">
-      <div class="col text-center">
-        <h3>
-          Join Our More Programs
-        </h3>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-4 text-center p-5">
-        <img class="img-fluid qualities-img p-5" src="images/Innovation Sunday.png" style="border-radius: 50%;" alt="Card image cap" >
-        <h5>
-          Innovation Sunday
-        </h5>
-        <p>
-          Sunday is to share your innovative ideas with others. Everyone with good ideas will beappreciated.<a href="sunday.html"><b>Read more...</b></a>
-        </p>
 
-      </div>
-      <div class="col-md-4 text-center p-5">
-        <img class="img-fluid qualities-img p-5" src="images/TeacherTuesday.png" style="border-radius: 50%;" alt="Card image cap">
-        <h5>
-          Teachers' Tuesday
-        </h5>
-        <p>
-          Teachers' Tuesday is a platform for educators to come together, share their experiences,  <a href="tuesday.html"><b>Read more...</b></a>
-        </p>
 
-      </div>
-      <div class="col-md-4 text-center p-5">
-        <img class="img-fluid qualities-img p-5" src="images/Copy of WonderfulWednesday.png" style="border-radius: 50%;" alt="Card image cap">
-        <h5>
-          Wonderful Wednesday 
-        </h5>
-        <p>
-          Wonderful Wednesday is a day dedicated to personal growth and goal-setting.  <a href="wendnesday.html"><b>Read more...</b></a>
-        </p>
+<br><br><br>
 
-      </div>
-    </div>
 
-    <div class="row mb-md-3">
-      <div class="col-md-4 text-center p-5">
-        <img class="img-fluid qualities-img p-5" src="images/Teaming Thursday.jpg" style="border-radius: 50%;"  alt="Card image cap">
-        <h5>
-          Teaming Thursday
-        </h5>
-        <p>
-          Teaming Thursday is a day dedicated to team building and collaboration among members of Smart Cookies. <a href="thursday.html"><b>Read more...</b></a>
-        </p>
-      </div>
-      <div class="col-md-4 text-center p-5">
-        <img class="img-fluid qualities-img p-5" src="images/Farming  Friday.png" style="border-radius: 50%;"  alt="Card image cap">
-        <h5>
-          Farming Friday
-        </h5>
-        <p>
-          Farming Friday aims at bringing all the farmers, students, research scholars, research scientists <a href="friday.html"><b>Read more...</b></a>
-        </p>
-      </div>
-      <div class="col-md-4 text-center p-5">
-        <img class="img-fluid qualities-img p-5" src="images/saturday.jpg" style="border-radius: 50%;" alt="Card image cap">
-        <h5>
-          Startup Saturday
-        </h5>
-        <p>
-          Startup Saturday is a day dedicated to fostering innovation and entrepreneurship by bringing together individuals  <a href="saturday.html"><b>Read more...</b></a>
-        </p>
-      </div>
-    </div>
-</section>
-<!--Our More Program End-->
-  
-<!-- Footer Section start -->
+    <!-- Footer Section start -->
  <footer class="footer-area sky-gray-bg padding-bottom padding-top-50 relative wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
     <div class="footer-bottom-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-xs-12 sm-center xs-center sm-mb50 xs-mb50">
                     <div class="footer-logo mb20">
-                        <a href="#"><img src="images/logo.png" alt=""></a>
+                        <a href="index.html"><img src="images/logo.png" alt=""></a>
                     </div>
                     <div class="footer-about">
                         <p>Smart Cookie believes in the power of youth.</p>
@@ -477,6 +366,6 @@
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     
-
-  </body>
-</html> 
+    </body>
+  </html>
+  
