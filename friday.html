@@ -103,9 +103,6 @@
 .waviy span {
   position: relative;
   display: inline-block;
-
- 
-  text-transform: uppercase;
   animation: flip 5s infinite;
   animation-delay: calc(.2s * var(--i))
 }
@@ -119,17 +116,17 @@
    text-transform: uppercase;
   background-image: linear-gradient(
     -225deg,
-    #231557 0%,
-    #44107a 29%,
+    #231557 50%,
+    #44107a 59%,
     #ff1361 67%,
-    #f8ad22 100%
+    #fe399c 100%
+    /* #f8ad22 100% */
   );
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
   color: #fff;
   background-clip: text;
-  text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 5s linear ;
@@ -140,6 +137,103 @@
 @keyframes textclip {
   to {
     background-position: 200% center;
+  }
+}
+.blog-post {
+  display: flex;
+  align-items: center;
+  max-width: 90rem;
+  background-color: #fff;
+  padding: 2.5rem;
+  box-shadow: 0 0.7rem 3rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.8rem;
+}
+.second{
+  flex-direction: row-reverse;
+}
+
+.second .blog-post__img{
+  transform: translateX(8rem);
+  position:relative;
+}
+.blog-post__img {
+  position: relative;
+  min-width: 35rem;
+  max-width: 35rem;
+  height: 30rem;
+  transform: translateX(-8rem);
+}
+.blog-post__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+.blog-post__img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(20deg,#40e0d0,#00b7ff);
+  box-shadow: 0.2rem 0.2rem 1rem 0.3px rgba(0, 0, 0, 0.01);
+  border-radius: 0.8rem;
+  opacity: 0.5;
+}
+.blog-post__date span {
+  display: block;
+  color: #8e8c8c;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+.blog-post__title {
+  font-size: 2.5rem;
+  margin: 1.5rem 0 2rem;
+  text-transform: uppercase;
+  color: #40e0d0;
+ /*color: black;*/
+}
+.blog-post__info p {
+  margin-bottom: 3rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+.blog-post__cta {
+  display: inline-block;
+  /* background-image: linear-gradient(to right, #00b7ff 0%, #40e0d0 100%); */
+  /*background-image: linear-gradient(20deg, #00b7ff, #40e0d0); */
+  background-color:  #fe399c;
+  padding: 1rem 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 0.8rem;
+  text-decoration: none;
+}
+.blog-post__cta:hover {
+  /*background-image: linear-gradient(to right, #00b7ff 0%, #40e0d0 100%);*/
+  background-color:  #fe399c;
+}
+@media (max-width: 1068px) {
+  .blog-post {
+    max-width: 80rem;
+  }
+  .blog-post__img {
+    min-width: 30rem;
+    max-width: 30rem;
+  }
+}
+@media (max-width: 868px) {
+  .blog-post {
+    max-width: 70rem;
+  }
+}
+@media (max-width: 768px) {
+  .blog-post {
+    padding: 2.5rem;
+    flex-direction: column;
+  }
+  .blog-post__img {
+    min-width: 100%;
+    transform: translate(0, -8rem);
   }
 }
   </style>
@@ -198,7 +292,7 @@
             </li>
 
             <li class="nav-item act">
-              <a class="nav-link" style="color: black" href="#">
+              <a class="nav-link" style="color: black" href="#testimonials">
                 <img
                   src="images/review)logo.png"
                   width="24"
@@ -211,7 +305,7 @@
               </a>
             </li>
             <li class="nav-item act">
-              <a class="nav-link" style="color: black" href="#"
+              <a class="nav-link" style="color: black" href="aboutus.html"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -269,7 +363,117 @@
         </div>
       </section>
       <!--Breadcrum section End-->
-      <section class="p-2 pt-md-4 pb-md-4">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <!-- <img class="d-block w-100" src="..." alt="First slide"> -->
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-6 text-img">
+                  <h2 class="animate-charcter">
+                    "A Day for Growth and Collaboration, Nurturing Agriculture, Nurturing Our Future on Friday"
+                  </h2>
+                  <div class="btn-c">
+                    <button class="btn">
+                      <a href="#farming_friday">Read more</a>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 text-img">
+                  <img
+                    class="img-fluid p-3 img-responsive img"
+                    src="images/Farming  Friday.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <!-- <img class="d-block w-100" src="..." alt="Second slide"> -->
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-6 text-img">
+                  <h2 class="animate-charcter">
+                    "Unleash your inner fashionista every Friday!"
+                  </h2>
+                  <div class="btn-c">
+                    <button class="btn">
+                      <a href="#fashion_friday">Read more</a>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 text-img">
+                  <img
+                    class="img-fluid p-3 img-responsive img"
+                    src="images/fashionfriday.jpg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <!-- <img class="d-block w-100" src="..." alt="Second slide"> -->
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-6 text-img">
+                  <h2 class="animate-charcter">
+                    "Experience the future of finance with Fin-Tech Friday!"
+                  </h2>
+                  <div class="btn-c">
+                    <button class="btn">
+                      <a href="#fintech_friday">Read more</a>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 text-img">
+                  <img
+                    class="img-fluid p-3 img-responsive img"
+                    src="images/fin-techfriday.jpeg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <!-- <img class="d-block w-100" src="..." alt="Third slide"> -->
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-6 text-img">
+                  <h2 class="animate-charcter">
+                    "Satisfy your cravings with Foodie Friday - the perfect start to a delicious weekend!"
+                  </h2>
+                  <div class="btn-c">
+                    <button class="btn">
+                      <a href="#foodie_friday">Read more</a>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 text-img">
+                  <img
+                    class="img-fluid p-3 img-responsive img"
+                    src="images/Foodie_friday.jpeg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+
+      <!-- <section class="p-2 pt-md-4 pb-md-4">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-img">
@@ -291,7 +495,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
     </section>
     <!--Banner section end  -->
     <!--About section start  -->
@@ -303,7 +507,7 @@
         <span style="--i:3">o</span>
         <span style="--i:4">u</span>
         <span style="--i:5">t</span>
-        <span style="--i:8"> </span>
+        <span style="--i:5"> </span>
         <span style="--i:6">E</span>
         <span style="--i:7">v</span>
         <span style="--i:8">e</span>
@@ -311,7 +515,8 @@
         <span style="--i:10">t</span>
        
        </div></h2>
-      <h3 class="text-center text">Farming Friday</h3>
+       <br><br><br>
+      <!-- <h3 class="text-center text">Farming Friday</h3>
       <div class="para">
         <p>
           Farming Friday aims at bringing all the farmers, students, research
@@ -340,11 +545,117 @@
           <a href="register.html">Register for Event</a>
         </button>
       </div>
-    </section>
+    </section> -->
+
+
+    <!--Each Event of Friday Start-->
+    <!--Post 1-->
+    <h2 id="farming_friday"></h2>
+    <article class="blog-post">
+      <div class="blog-post__img">
+        <img src="images/Farming  Friday.png" alt="" />
+      </div>
+      <div class="blog-post__info">
+        <div class="blog-post__date">
+          <span>Tuesday</span>
+          <span>2/14/2023</span>
+        </div>
+        <h2 class="blog-post__title">Farming Friday</h2>
+        <p>
+          Farming Friday aims at bringing all the farmers, students, research
+          scholars, research scientists and all the stakeholders related to
+          agriculture and allied sciences to a common platform so that they can
+          share their ideas, problems and provide solutions to them. So let’s
+          come together in this event to discuss because If agriculture goes
+          wrong, nothing else will have a chance to go right in the country.
+        </p>
+        <a href="register.html" class="blog-post__cta">Register for Event</a>
+      </div>
+    </article>
+
+<br><br><br>
+<!--post 2-->
+<h2 id="fashion_friday"></h2>
+    <article class="blog-post second">
+      <div class="blog-post__img">
+        <img src="images/fashionfriday.jpg" alt="" />
+      </div>
+      <div class="blog-post__info">
+        <div class="blog-post__date">
+          <span>Tuesday</span>
+          <span>2/14/2023</span>
+        </div>
+        <h2 class="blog-post__title">Fashion Friday</h2>
+        <p>
+          Fashion Friday is an event that celebrates fashion and style.During Fashion Friday, 
+          fashion shows, trunk shows, and other fashion-related events are often organized. 
+          Fashion designers, models, and stylists may showcase their work, and fashion enthusiasts 
+          can view and purchase the latest collections. Fashion bloggers and influencers may 
+          also attend and share their insights into tlatest fashion trends and styles.
+        </p>
+        <a href="register.html" class="blog-post__cta"> Register for Event</a>
+      </div>
+    </article>
+<br><br><br>
+<!--Post 3-->
+<h2 id="foodie_friday"></h2>
+    <article class="blog-post">
+      <div class="blog-post__img">
+        <img src="images/Foodie_friday.jpeg" alt="" />
+      </div>
+      <div class="blog-post__info">
+        <div class="blog-post__date">
+          <span>Tuesday</span>
+          <span>2/14/2023</span>
+        </div>
+        <h2 class="blog-post__title">Foodie Friday</h2>
+        <p>
+          Foodie Friday is an event that celebrates food and culinary arts.its a day when people can 
+          come together to enjoy a variety of delicious food and drinks, learn about different 
+          cuisines and cooking techniques, and connect with other food lovers.
+          <br>During Foodie Friday, food-related events such as cooking demonstrations, food tastings, 
+          and wine tastings are often organized. Local chefs and restaurants may showcase their signature 
+          dishes, and food enthusiasts can try out different foods and beverages from around the world. 
+          Food bloggers and influencers may also attend and share their insights into the latest food trends 
+          and culinary techniques.
+        </p>
+        <a href="register.html" class="blog-post__cta">Register for Event</a>
+      </div>
+    </article>
+    <br><br><br>
+    <!--Post -4 -->
+    <h2 id="fintech_friday"></h2>
+    <article class="blog-post second">
+      <div class="blog-post__img">
+        <img src="images/fin-techfriday.jpeg" alt="" />
+      </div>
+      <div class="blog-post__info">
+        <div class="blog-post__date">
+          <span>Tuesday</span>
+          <span>2/14/2023</span>
+        </div>
+        <h2 class="blog-post__title">Fin-Tech Friday</h2>
+        <p>
+          A fintech  friday event is an industry-specific conference or gathering that brings 
+          together professionals and experts from the fintech industry to discuss and showcase 
+          the latest trends, technologies, and innovations in finance and financial services.
+
+          This events provide a platform for industry leaders, entrepreneurs, investors, and other 
+          stakeholders to share knowledge and insights, network, and collaborate on new initiatives 
+          and projects. They often feature keynote speeches, panel discussions, workshops, product demos, 
+          and pitch sessions.
+        </p>
+        <a href="register.html" class="blog-post__cta"> Register for Event</a>
+      </div>
+    </article>
+    <br><br><br>
+    <!--Each Event of Friday End-->
 
     <!-- about more event -->
 
     <!-- Review section start -->
+    <h2 id="testimonials"></h2>
+<br><br><br>
     <h2 class="text-center">What our participants says about us</h2>
     <div
       id="carouselExampleIndicators"
