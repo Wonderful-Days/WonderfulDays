@@ -51,6 +51,7 @@
       height: 60vh;
       width: auto;
       padding-left: 30px;
+      
       border-radius:50px;
     }
     .btn-c {
@@ -144,7 +145,7 @@
   align-items: center;
   max-width: 90rem;
   background-color: #fff;
-  padding: 2.5rem;
+  padding: 4.5rem;
   box-shadow: 0 0.7rem 3rem rgba(0, 0, 0, 0.2);
   border-radius: 0.8rem;
 }
@@ -152,16 +153,16 @@
   flex-direction: row-reverse;
 }
 
+.blog-post__img {
+  position: relative;
+  min-width: 20rem;
+  max-width: 35rem;
+  height:20rem;
+  transform: translateX(-8rem);
+}
 .second .blog-post__img{
   transform: translateX(8rem);
   position:relative;
-}
-.blog-post__img {
-  position: relative;
-  min-width: 35rem;
-  max-width: 35rem;
-  height: 30rem;
-  transform: translateX(-8rem);
 }
 .blog-post__img img {
   display: block;
@@ -170,13 +171,14 @@
   object-fit: cover;
   border-radius: 0.8rem;
 }
+
 .blog-post__img::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(20deg,#40e0d0,#00b7ff);
+  border: 20px solid #40e0d0;
   box-shadow: 0.2rem 0.2rem 1rem 0.3px rgba(0, 0, 0, 0.01);
-  border-radius: 0.8rem;
+  border-radius: 54px;
   opacity: 0.5;
 }
 .blog-post__date span {
@@ -236,8 +238,14 @@
     transform: translate(0, -8rem);
   }
 }
-  </style>
 
+/* Carousel top */
+.headSection img{
+
+box-shadow: none;
+}
+  </style>
+ 
   <body>
     <!-- HEADER SECTION -->
     <section id="nav-bar">
@@ -363,7 +371,7 @@
         </div>
       </section>
       <!--Breadcrum section End-->
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div id="carouselExampleControls" class="carousel slide headSection" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <!-- <img class="d-block w-100" src="..." alt="First slide"> -->
@@ -473,29 +481,7 @@
       </div>
 
 
-      <!-- <section class="p-2 pt-md-4 pb-md-4">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6 text-img">
-              <h2 class="animate-charcter">
-                "A Day for Growth and Collaboration, Nurturing Agriculture, Nurturing Our Future on Friday"
-              </h2>
-              <div class="btn-c">
-                <button class="btn">
-                  <a href="register.html">Register for Event</a>
-                </button>
-              </div>
-            </div>
-            <div class="col-md-6 text-img">
-              <img
-                class="img-fluid p-3 img-responsive img"
-                src="images/Farming  Friday.png"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-      </section> -->
+   
     </section>
     <!--Banner section end  -->
     <!--About section start  -->
@@ -513,39 +499,11 @@
         <span style="--i:8">e</span>
         <span style="--i:9">n</span>
         <span style="--i:10">t</span>
+        <span style="--i:11">s</span>
        
        </div></h2>
        <br><br><br>
-      <!-- <h3 class="text-center text">Farming Friday</h3>
-      <div class="para">
-        <p>
-          Farming Friday aims at bringing all the farmers, students, research
-          scholars, research scientists and all the stakeholders related to
-          agriculture and allied sciences to a common platform so that they can
-          share their ideas, problems and provide solutions to them. So let’s
-          come together in this event to discuss because If agriculture goes
-          wrong, nothing else will have a chance to go right in the country.
-        </p>
-        <p>
-          The ultimate goal of farming is not the growing of crops, but the
-          cultivation and perfection of human beings.Let us not forget that the
-          cultivation of the earth is the most important labour of man. When
-          tillage begins, other arts follow. The farmers, therefore, are the
-          founders of human civilization.
-        </p>
-        <p>
-          Overall, the goal of Farming Friday is to create a platform for all
-          stakeholders related to agriculture and allied sciences to come
-          together, learn from each other, and work towards a better future for
-          the agriculture industry.
-        </p>
-      </div>
-      <div class="btn-c">
-        <button class="btn">
-          <a href="register.html">Register for Event</a>
-        </button>
-      </div>
-    </section> -->
+      
 
 
     <!--Each Event of Friday Start-->
@@ -553,13 +511,10 @@
     <h2 id="farming_friday"></h2>
     <article class="blog-post">
       <div class="blog-post__img">
-        <img src="images/Farming  Friday.png" alt="" />
+        <img src="images/Farming  Friday.png"   alt="" />
       </div>
       <div class="blog-post__info">
-        <div class="blog-post__date">
-          <span>Tuesday</span>
-          <span>2/14/2023</span>
-        </div>
+        
         <h2 class="blog-post__title">Farming Friday</h2>
         <p>
           Farming Friday aims at bringing all the farmers, students, research
@@ -581,10 +536,7 @@
         <img src="images/fashionfriday.jpg" alt="" />
       </div>
       <div class="blog-post__info">
-        <div class="blog-post__date">
-          <span>Tuesday</span>
-          <span>2/14/2023</span>
-        </div>
+        
         <h2 class="blog-post__title">Fashion Friday</h2>
         <p>
           Fashion Friday is an event that celebrates fashion and style.During Fashion Friday, 
@@ -604,10 +556,7 @@
         <img src="images/Foodie_friday.jpeg" alt="" />
       </div>
       <div class="blog-post__info">
-        <div class="blog-post__date">
-          <span>Tuesday</span>
-          <span>2/14/2023</span>
-        </div>
+        
         <h2 class="blog-post__title">Foodie Friday</h2>
         <p>
           Foodie Friday is an event that celebrates food and culinary arts.its a day when people can 
@@ -630,10 +579,7 @@
         <img src="images/fin-techfriday.jpeg" alt="" />
       </div>
       <div class="blog-post__info">
-        <div class="blog-post__date">
-          <span>Tuesday</span>
-          <span>2/14/2023</span>
-        </div>
+        
         <h2 class="blog-post__title">Fin-Tech Friday</h2>
         <p>
           A fintech  friday event is an industry-specific conference or gathering that brings 
@@ -649,6 +595,7 @@
       </div>
     </article>
     <br><br><br>
+  </section>
     <!--Each Event of Friday End-->
 
     <!-- about more event -->
