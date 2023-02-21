@@ -296,3 +296,26 @@ background-color:  #2abbf4;
 background-color:#2abbf4;
 border-radius: 12px;
 }
+
+
+.products{
+  padding-bottom: 20px;
+}
+
+.products img{
+  height: 165px;
+  margin-bottom: 10px;
+}
+.products h3{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+#myCarousel .carousel-inner{
+padding: 0 100px 0 100px;
+  
+}
+#myCarousel img{
+  box-shadow: none;
+}
