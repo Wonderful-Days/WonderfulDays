@@ -23,7 +23,7 @@
     
     <link rel="stylesheet" href="style.css">
 
-    <title>Wonderful Wednesday</title>
+    <title>Wednesday Events</title>
   </head>
   <style>
     
@@ -139,6 +139,112 @@
   }
 }
     
+
+.blog-post {
+  display: flex;
+  align-items: center;
+  max-width: 90rem;
+  background-color: #fff;
+  padding: 4.5rem;
+  box-shadow: 0 0.7rem 3rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.8rem;
+}
+.second{
+  flex-direction: row-reverse;
+}
+
+.blog-post__img {
+  position: relative;
+  min-width: 20rem;
+  max-width: 35rem;
+  height:20rem;
+  transform: translateX(-8rem);
+}
+.second .blog-post__img{
+  transform: translateX(8rem);
+  position:relative;
+}
+.blog-post__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  border-radius: 54px;
+}
+
+.blog-post__img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 20px solid #40e0d0;
+  box-shadow: 0.2rem 0.2rem 1rem 0.3px rgba(0, 0, 0, 0.01);
+  border-radius: 54px;
+  opacity: 0.5;
+}
+.blog-post__date span {
+  display: block;
+  color: #8e8c8c;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+.blog-post__title {
+  font-size: 2.5rem;
+  margin: 1.5rem 0 2rem;
+  text-transform: uppercase;
+  color: #40e0d0;
+ /*color: black;*/
+}
+.blog-post__info p {
+  margin-bottom: 3rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+.blog-post__cta {
+  display: inline-block;
+  /* background-image: linear-gradient(to right, #00b7ff 0%, #40e0d0 100%); */
+  /*background-image: linear-gradient(20deg, #00b7ff, #40e0d0); */
+  background-color:  #fe399c;
+  padding: 1rem 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 0.8rem;
+  text-decoration: none;
+}
+.blog-post__cta:hover {
+  /*background-image: linear-gradient(to right, #00b7ff 0%, #40e0d0 100%);*/
+  background-color:  #fe399c;
+}
+@media (max-width: 1068px) {
+  .blog-post {
+    max-width: 80rem;
+  }
+  .blog-post__img {
+    min-width: 30rem;
+    max-width: 30rem;
+  }
+}
+@media (max-width: 868px) {
+  .blog-post {
+    max-width: 70rem;
+  }
+}
+@media (max-width: 768px) {
+  .blog-post {
+    padding: 2.5rem;
+    flex-direction: column;
+  }
+  .blog-post__img {
+    min-width: 100%;
+    transform: translate(0, -8rem);
+  }
+}
+
+/* Carousel top */
+.headSection img{
+
+box-shadow: none;
+}
     
 
   </style>
@@ -215,42 +321,89 @@
     </section>
 <!-- Header section End -->
 
-<!-- Banner section start -->
-<section class="banner">
-<!--Breadcrumbs Section Start-->
-<section class="breadcrumbs-section">
-    <div class="container pl-3 p-sm-3">
-      <div class="row">
-        <div class="col-12">
-          <!--<h2>Contact Us</h2>-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active">Wonderful Wendnesday</li>
-          </ol>
+    <!-- Banner section start -->
+    <section class="banner">
+      <!--Breadcrumbs Section Start-->
+      <section class="breadcrumbs-section">
+        <div class="container pl-3 p-sm-3">
+          <div class="row">
+            <div class="col-12">
+              <!--<h2>Contact Us</h2>-->
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Wednesday Events</li>
+              </ol>
+            </div>
+          </div>
         </div>
+      </section>
+      <!--Breadcrum section End-->
+      <div id="carouselExampleControls" class="carousel slide headSection" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <!-- <img class="d-block w-100" src="..." alt="First slide"> -->
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-6 text-img">
+                  <h2 class="animate-charcter">
+                    "DISCOVER YOUR PASSIONS AND DREAMS ON WONDERFUL WEDNESDAY. JOIN THE COMMUNITY OF GO-GETTERS AND DREAMERS."
+                  </h2>
+                  <div class="btn-c">
+                    <button class="btn">
+                      <a href="#Wonderful_Wed">Read more</a>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 text-img">
+                  <img
+                    class="img-fluid p-3 img-responsive img"
+                    src="images/Copy of WonderfulWednesday.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <!-- <img class="d-block w-100" src="..." alt="Second slide"> -->
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-6 text-img">
+                  <h2 class="animate-charcter">
+                    "Empowering Women to Lead, Inspire and Succeed. Empowering Women Everywhere!"
+                  </h2>
+                  <div class="btn-c">
+                    <button class="btn">
+                      <a href="#Womens_Wed">Read more</a>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 text-img">
+                  <img
+                    class="img-fluid p-3 img-responsive img"
+                    src="images/womenWed.jfif"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-    </div>
-  </section>
-  <!--Breadcrum section End-->
-  <section class="p-2 pt-md-4 pb-md-4">
-    <div class="container ">
-      <div class="row align-items-center ">
-        <div class="col-md-6 text-img">
-        
-          <h2 class="animate-charcter">"Discover your passions and dreams on Wonderful Wednesday.
-            Join the community of go-getters and dreamers."
-            </h2>
-        <div class="btn-c">
-          <button class="btn "><a href="#">Register for Event</a></button>
-        </div> 
-        </div>
-        <div class="col-md-6 text-img">
-          <img class="img-fluid p-3 img-responsive img" src="images/Copy of WonderfulWednesday.png" alt="">
-        </div>
-      </div>
-    </div>
-  </section>
-</section>
+
+
+   
+    </section>
     <!--Banner section end  -->
     <!--About section start  -->
     
@@ -268,72 +421,96 @@
         <span style="--i:9">n</span>
         <span style="--i:10">t</span>      
        </div></h2>
-  <h3 class="text-center text"> Wonderful Wendnesday</h3>
- <div class="para">
-    <p>Wonderful Wednesday is a day dedicated to personal growth and goal-setting. On this day, individuals are encouraged to reflect on their passions, interests, and dreams, and to set achievable goals for themselves.
-</p>
-  <p>The focus of Wonderful Wednesday is on helping people to take action towards their aspirations and to live a more fulfilling life. Whether you have a specific goal in mind or just a general idea of what you want to achieve, Wonderful Wednesday provides a platform for you to share your aspirations and receive support and encouragement from others.
-</p>   
-  <p>This day also provides an opportunity for people to connect with others who share similar interests and passions. By sharing your goals and aspirations, you can find accountability partners, receive feedback and advice, and form meaningful connections with others who are working towards similar objectives.
-</p>
-  <p>So if you are looking to take control of your life and achieve your goals, make sure to participate in Wonderful Wednesday. Let us come together to support each other, share our passions, and work towards our dreams.
-</p>
- </div>
- <div class="btn-c">
-  <button class="btn "><a href="#">Register for Event</a></button>
-</div>
-</section>
+       <br><br><br>
+ 
+
+    <!--Each Event of Friday Start-->
+    <!--Post 1-->
+    <h2 id="Wonderful_Wed"></h2>
+    <article class="blog-post">
+      <div class="blog-post__img">
+        <img src="images/Copy of WonderfulWednesday.png"   alt="" />
+      </div>
+      <div class="blog-post__info">
+        
+        <h2 class="blog-post__title">Wonderful Wednesday</h2>
+        <p>
+          Wonderful Wednesday is a day dedicated to personal growth and goal-setting. On this day, individuals are encouraged to reflect on their passions, interests, and dreams, and to set achievable goals for themselves.
+
+          The focus of Wonderful Wednesday is on helping people to take action towards their aspirations and to live a more fulfilling life. Whether you have a specific goal in mind or just a general idea of what you want to achieve, Wonderful Wednesday provides a platform for you to share your aspirations and receive support and encouragement from others.
+            </p>
+        <a href="register.html" class="blog-post__cta">Register for Event</a>
+      </div>
+    </article>
+
+<br><br><br>
+<!--post 2-->
+<h2 id="Womens_Wed"></h2>
+    <article class="blog-post second">
+      <div class="blog-post__img">
+        <img src="images/womenWed.jfif" alt="" />
+      </div>
+      <div class="blog-post__info">
+        
+        <h2 class="blog-post__title">Women's Wednesday</h2>
+        <p>
+          Women's Wednesday is a day to celebrate, honor, and recognize the contributions and achievements of women. It is an opportunity to acknowledge the challenges that women face, honor the women who have made significant contributions to society, recognize progress in the fight for gender equality, and empower and support women. By recognizing the contributions of women in various areas, we can inspire future generations of women to achieve great things.
+        </p>
+        <a href="register.html" class="blog-post__cta"> Register for Event</a>
+      </div>
+    </article>
+
+    <br><br><br>
+  </section>
+    <!--Each Event of Friday End-->
 
 
 <!-- about more event -->
 
-  <!-- Review section start -->
-    <h2 id="testimonials"></h2>
+<!-- Review section start -->
+<h2 id="testimonials"></h2>
 <br><br><br>
-  <h2 class="text-center">What our participants says about us</h2>
+<h2 class="text-center">What our participants says about us</h2>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
-    <ol class="carousel-indicators ">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active dash"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1" class="dash"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2" class="dash"></li>
-    </ol>
-    <div class="carousel-inner ">
-      <div class="carousel-item active text-center">
-        <img src="images/user2.jpg" width="30%" height="300px" class="bd-placeholder-img " alt="">
-        <h2>John Cena</h2>
-        <p >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
-       
-      </div>
-      <div class="carousel-item text-center">
-        <img src="images/user1.jpg" width="30%" height="300px" class="bd-placeholder-img " alt="">
-        <h2>John Cena</h2>
-        <p >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
-        
-      </div>
-      <div class="carousel-item text-center">
-        <img src="images/user1.jpg" width="30%" height="300px" class="bd-placeholder-img " alt="">
-        <h2>John Cena</h2>
-        <p >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
-        
-      </div>
+  <ol class="carousel-indicators ">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active dash"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1" class="dash"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2" class="dash"></li>
+  </ol>
+  <div class="carousel-inner ">
+    <div class="carousel-item active text-center">
+      <img src="images/review1.jpg" width="20%" height="200px" class="bd-placeholder-img " alt="">
+      <h2 style="padding-top: 20px;">Dr. Pankaj Kumar</h2>
+      <p style="max-height: 180px;">DPIIT IPR Chair Professor at National Law University and Judicial Academy, Assam (NLUJAA), a registered Patent & Design Agent, Advocate, Trademark Attorney, IPR Facilitator, AICTE IPR Ambassador & the IPR Trainer</p>
+     
     </div>
-    <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
-      <span class="carousel-control-prev-icon " aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
-      <span class="carousel-control-next-icon " aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </button>
+    <div class="carousel-item text-center">
+      <img src="images/review.jpg" width="20%" height="200px" class="bd-placeholder-img " alt="">
+      <h2 style="padding-top: 20px;">John Cena</h2>
+      <p style="max-height: 180px;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
+      
+    </div>
+    <div class="carousel-item text-center">
+      <img src="images/review1.jpg" width="20%" height="200px" class="bd-placeholder-img " alt="">
+      <h2 style="padding-top: 20px;">John Cena</h2>
+      <p style="max-height: 180px;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum natus nulla laborum. Cupiditate deleniti quae eveniet repellat debitis labore impedit accusamus dolores sequi iusto sint, exercitationem eaque cum corrupti alias.</p>
+      
+    </div>
   </div>
-  
-    
-  
-  <!-- Review section end-->  
+  <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+    <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+    <span class="carousel-control-next-icon " aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </button>
+</div>
 
+  
 
-  <!--Our More Progeam Start-->
+<!-- Review section end-->  
+
 <!--Our More Progeam Start-->
 <section class="pt-3 pb-4">
   <div class="container">
@@ -346,10 +523,20 @@
     </div>
     <hr>
     <div class="row">
+       <div class="col-md-4 text-center p-5">
+        <img class="img-fluid qualities-img p-5" src="images/Innovation Sunday.png" style="border-radius: 50%;" alt="Card image cap" >
+        <h5>
+          Innovation Sunday
+        </h5>
+        <p>
+          Sunday is to share your innovative ideas with others. Everyone with good ideas will beappreciated.<a href="sunday.html"><b>Read more...</b></a>
+        </p>
+
+      </div>
       <div class="col-md-4 text-center p-5">
         <img class="img-fluid qualities-img p-5" src="images/Mooney Monday.png" style="border-radius: 50%;" alt="Card image cap" >
         <h5>
-          Monney Monday
+          Mooney Monday
         </h5>
         <p>
           Mooney Monday is a celebration of poetry and all things poetic.  <a href="monday.html"><b>Read more...</b></a>
@@ -366,19 +553,11 @@
         </p>
 
       </div>
-      <div class="col-md-4 text-center p-5">
-        <img class="img-fluid qualities-img p-5" src="images/Copy of WonderfulWednesday.png" style="border-radius: 50%;" alt="Card image cap">
-        <h5>
-          Innovation Sunday
-        </h5>
-        <p>
-         Sunday is to share your innovative ideas with others.  <a href="#"><b>Read more...</b></a>
-        </p>
-
-      </div>
+     
     </div>
 
     <div class="row mb-md-3">
+      
       <div class="col-md-4 text-center p-5">
         <img class="img-fluid qualities-img p-5" src="images/Teaming Thursday.jpg" style="border-radius: 50%;"  alt="Card image cap">
         <h5>
@@ -397,7 +576,8 @@
           Fashion Friday is a day dedicated to the celebration of fashion and its role in enhancing our lives. <a href="#"><b>Read more...</b></a>
         </p>
       </div>
-      <div class="col-md-4 text-center">
+    
+      <div class="col-md-4 text-center p-5">
         <img class="img-fluid qualities-img p-5" src="images/saturday.jpg" style="border-radius: 50%;" alt="Card image cap">
         <h5>
           Startup Saturday
@@ -409,8 +589,6 @@
     </div>
 </section>
 <!--Our More Program End-->
-<!--Our More Program End-->
-
 
   
   
