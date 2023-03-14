@@ -180,6 +180,25 @@ color: wheat;
 
 
 
+/* About Events Section */
+.waviy {
+  position: relative;
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  animation: flip 5s infinite;
+  animation-delay: calc(.2s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+/* About Events End */
+
+
+
 /* about section */
 .about{
 display: flex;
