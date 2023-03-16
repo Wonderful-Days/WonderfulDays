@@ -251,7 +251,7 @@ text-align: center;
 
 }
 .card{
-  border-left: 6px solid #2abbf4;
+  /*border-left: 6px solid #2abbf4;*/
  
   transition: all 0.3s ease-in-out;
 }
