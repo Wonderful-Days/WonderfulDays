@@ -297,7 +297,7 @@ padding-left: -30px !important;
 /* Review section */
 
 #carouselExampleIndicators{
-height: 500px;
+  height: 500px;
   padding-top: 25px;
   margin: 35px 75px 55px 75px;
   border-radius: 40px;
@@ -337,7 +337,7 @@ border-radius: 12px;
 
 
 #myCarousel .carousel-inner{
-padding: 0 100px 0 100px;
+  padding: 0 100px 0 100px;
   
 }
 #myCarousel img{
