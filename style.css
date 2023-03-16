@@ -199,7 +199,11 @@ color: wheat;
 }
 /* About Events End */
 
-
+.para1{
+  padding-top: 30px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
 
 /* about section */
 .about{
