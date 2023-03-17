@@ -251,13 +251,11 @@ text-align: center;
 
 }
 .card{
-  .card{
   border: 1px solid black;
   /* border-left: 6px solid #2abbf4; */
   padding: 25px;
  
   transition: all 0.3s ease-in-out;
-}
 }
 
 .card:hover{
