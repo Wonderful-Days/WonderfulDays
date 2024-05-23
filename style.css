@@ -329,7 +329,7 @@ footer a {
   border-radius: 55px;
   margin: 5px;;
   height: 650px;
-  background-color:#73b9d5;
+  background-color:#97cfe4;
   /* width: 1500px; */
 }
 
@@ -357,9 +357,9 @@ footer a {
   .btn24:hover {opacity: 0.6}
 
   .btn24 {
-    background-color: #f4511e;
+    background-color: #08d6f6;
     border: none;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 16px 32px;
     text-align: center;
     font-size: 16px;
