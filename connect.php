@@ -21,9 +21,10 @@ if(isset($_POST['register']))
 $name = $_POST['name'];
 $username = $_POST['username'];
 $email = $_POST['email'];
+$events = $_POST['events'];     
 $password = $_POST['password'];
 $repertpassword = $_POST['repeatpassword'];
-$sql = "insert into `register_form`(`Name`, `username`, `email`, `password`, `repertpassword`) VALUES ('$name','$username','$email','$password','$repertpassword')";
+$sql = "INSERT INTO `register_form`(`Name`, `username`,`events`, `email`, `password`, `repertpassword`) VALUES ('$name','$username','$events','$email','$password','$repertpassword')";
 if(mysqli_query($conn, $sql)){
  echo "<script>alert('new data inserted')</script>";
 }
@@ -31,10 +32,11 @@ else{
  echo "<script>alert(' data not inserted')</script>".mysqli_error($conn);
 }
 mysqli_close($conn);
-}
+}                                                              
 
 
-                // login page
+
+// login page
 
 if(!empty($_POST['login']))
 {
@@ -49,7 +51,8 @@ if(!empty($_POST['login']))
         { 
             $data = mysqli_fetch_assoc($result);
              if($data['password'] == $password){
-                echo "<script>alert('login sucessfull')</script>";  
+                echo "<script>alert('login sucessfull')</script>"; 
+                echo "<script>window.location='monday.html'</script>" ;
              }
          else
          {
