@@ -315,6 +315,30 @@ include("connect.php");
           <input type="text" id="registerUsername" class="form-control" name="username" />
           <label class="form-label" for="registerUsername">Username</label>
         </div>
+
+
+        <select name="events">
+          <option value="">select events</option>
+          <option value="INNOVATION SUNDAY">INNOVATION SUNDAY</option>
+          <option value="FUNDAY SUNDAY">FUNDAY SUNDAY</option>
+          <option value="Mooney Monday">Mooney Monday</option>
+          <option value="Motivational Monday">Motivational Monday</option>
+          <option value="Teachers' Tuesday">Teachers' Tuesday</option>
+          <option value="Travel' Tuesday">Travel' Tuesday</option>
+          <option value="Wonderful Wednesday">Wonderful Wednesday</option>
+          <option value="Women Wednesday">Women Wednesday</option>
+          <option value="Teaming Thursday">Teaming Thursday</option>
+          <option value="Thirsty Thursday">Thirsty Thursday</option>
+          <option value="Throwback Thursday">Throwback Thursday</option>
+          <option value="Fashion Friday">Fashion Friday</option>
+          <option value="Farming Friday">Farming Friday</option>
+          <option value="Foodie Friday">Foodie Friday</option>
+          <option value="Fin-Tech Friday">Fin-Tech Friday</option>
+          <option value="Startup Saturday">Startup Saturday</option>
+
+         </select>
+          <br>
+          <br>
   
         <!-- Email input -->
         <div class="form-outline mb-4">
