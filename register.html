@@ -20,6 +20,8 @@
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"
     rel="stylesheet"/>
+    <!-- dropdown menu for multiple event-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
     <title>Register Page</title>
 
     <style>
@@ -263,6 +265,35 @@
           <input type="text" id="registerUsername" class="form-control" />
           <label class="form-label" for="registerUsername">Username</label>
         </div>
+        <!--dropdown  -->
+           <div class="form-outline mb-4">
+              <label for="">select events</label>
+          <select name="events" id="events" multiple>
+          <option value="INNOVATION SUNDAY">INNOVATION SUNDAY😊</option>
+          <option value="FUNDAY SUNDAY">FUNDAY SUNDAY😀</option>
+          <option value="Mooney Monday">Mooney Monday🤗</option>
+          <option value="Motivational Monday">Motivational Monday🤞</option>
+          <option value="Teachers' Tuesday">Teachers' Tuesday👩‍🏫</option>
+          <option value="Travel' Tuesday">Travel' Tuesday🧳</option>
+          <option value="Wonderful Wednesday">Wonderful Wednesday😍</option>
+          <option value="Women Wednesday">Women Wednesday🚺</option>
+          <option value="Teaming Thursday">Teaming Thursday🎆</option>
+          <option value="Thirsty Thursday">Thirsty Thursday🍹</option>
+          <option value="Throwback Thursday">Throwback Thursday🫠</option>
+          <option value="Fashion Friday">Fashion Friday💃</option>
+          <option value="Farming Friday">Farming Friday🧑‍🌾</option>
+          <option value="Foodie Friday">Foodie Friday🍔</option>
+          <option value="Fin-Tech Friday">Fin-Tech Friday👨‍🎓</option>
+          <option value="Startup Saturday">Startup Saturday😎</option>
+
+         </select>
+         
+         <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+         <script>
+          new MultiSelectTag('events')  // id
+      </script>
+            </div>
+        
   
         <!-- Email input -->
         <div class="form-outline mb-4">
