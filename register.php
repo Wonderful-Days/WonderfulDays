@@ -1,43 +1,3 @@
-<?php 
-
-// if(isset($_POST['login']))
-// {
-//     $email = $_POST['email'];
-//     $password = $_POST['password'];
-    
-//         $query = "select * from wonderfulldays where email= '$email' and password='$password'";
-//         $result= mysqli_query($conn,$query);
-//         $count=mysqli_num_rows($result);
-//         if($count>0)
-//         { 
-//           $_SESSION['status']= "login sucessful"
-//           echo "<script>alert('login sucessfull')</script>".mysqli_error($conn);
-//         }
-//         else
-//         {
-//           echo "<script>alert('login sucessfull')</script>".mysqli_error($conn);
-//         }
-//  } 
-
-        // if($result)
-        // {
-        //     if($result && mysqli_num_rows($result)>0)
-        //     {
-        //         $user_data = mysqli_fetch_assoc($result);
-
-        //         if($user_data['password'] == $password)
-        //         {
-        //             header("location:index.php");
-        //             die; 
-        //         }
-        //     }
-        // }
-        // echo "<script type='text/javascript'>alert('wrong email or password')</script> ";
-
-
-
-?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -60,7 +20,8 @@
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"
     rel="stylesheet"/>
- 
+    <!-- dropdown menu for multiple event-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
     <title>Register Page</title>
 
     <style>
@@ -98,7 +59,7 @@
     <!-- HEADER SECTION -->
     <section id="nav-bar">
       <nav class="navbar navbar-expand-lg navbar-light ">
-          <a class="navbar-brand" href="index.html"><img src="images/logo.png"class="logo"></a>
+          <a class="navbar-brand" href="index.php"><img src="images/logo.png"class="logo"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -176,7 +137,7 @@
               <div class="col-12">
                 <!--<h2>Contact Us</h2>-->
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                   <li class="breadcrumb-item active">Register Page</li>
                 </ol>
               </div>
@@ -228,13 +189,13 @@
   
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="email" id="loginName" class="form-control" name="email" />
+          <input type="email" id="loginName" class="form-control" name="email"/>
           <label class="form-label" for="loginName">Email or username</label>
         </div>
   
         <!-- Password input -->
         <div class="form-outline mb-4">
-          <input type="password" id="loginPassword" class="form-control" name="password" />
+          <input type="password" id="loginPassword" class="form-control" name="password"/>
           <label class="form-label" for="loginPassword">Password</label>
         </div>
   
@@ -255,7 +216,7 @@
         </div>
   
         <!-- Submit button -->
-        <a href="index.php"><input type="submit" class="btn btn-primary btn-block mb-4" name="login" value="log in"></a>
+        <button type="submit" class="btn btn-primary btn-block mb-4" name="login" >Sign in</button>
   
         <!-- Register buttons -->
         <div class="text-center" role="tab">
@@ -266,21 +227,12 @@
           <a class="nav-link" data-mdb-toggle="pill" href="#pills-register" role="tab"
             aria-controls="pills-register" aria-selected="false">Register</a>
         </li> -->
-     </form>
+
+
+      </form>
     </div>
-
-
-
-
-
-
-
-
-
-
     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-      <!-- connection to php -->
-      <form  action="connect.php" method="post">
+      <form action="connect.php" method="post">
         <div class="text-center mb-3">
           <p>Sign up with:</p>
           <button type="button" class="btn btn-link btn-floating mx-1">
@@ -304,46 +256,194 @@
   
         <!-- Name input -->
         <div class="form-outline mb-4">
-          <input type="text" id="registerName" class="form-control" name="name" />
+          <input type="text" id="registerName" class="form-control" name="fullName"/>
           <label class="form-label" for="registerName">Name</label>
         </div>
   
         <!-- Username input -->
         <div class="form-outline mb-4">
-          <input type="text" id="registerUsername" class="form-control" name="username" />
+          <input type="text" id="registerUsername" class="form-control" name="username"/>
           <label class="form-label" for="registerUsername">Username</label>
         </div>
-
-
-        <select name="events">
-          <option value="">select events</option>
-          <option value="INNOVATION SUNDAY">INNOVATION SUNDAY</option>
-          <option value="FUNDAY SUNDAY">FUNDAY SUNDAY</option>
-          <option value="Mooney Monday">Mooney Monday</option>
-          <option value="Motivational Monday">Motivational Monday</option>
-          <option value="Teachers' Tuesday">Teachers' Tuesday</option>
-          <option value="Travel' Tuesday">Travel' Tuesday</option>
-          <option value="Wonderful Wednesday">Wonderful Wednesday</option>
-          <option value="Women Wednesday">Women Wednesday</option>
-          <option value="Teaming Thursday">Teaming Thursday</option>
-          <option value="Thirsty Thursday">Thirsty Thursday</option>
-          <option value="Throwback Thursday">Throwback Thursday</option>
-          <option value="Fashion Friday">Fashion Friday</option>
-          <option value="Farming Friday">Farming Friday</option>
-          <option value="Foodie Friday">Foodie Friday</option>
-          <option value="Fin-Tech Friday">Fin-Tech Friday</option>
-          <option value="Startup Saturday">Startup Saturday</option>
-
-         </select>
-          <br>
-          <br>
+        <!-- mobile number -->
+        <div class="form-outline mb-4">
+          <div style="display: flex;">
+              <select id="country_code" name="country_code" style="flex: 0.3;">
+                <option value="1">USA (+1)</option>
+                <option value="7">Russia (+7)</option>
+                <option value="20">Egypt (+20)</option>
+                <option value="27">South Africa (+27)</option>
+                <option value="30">Greece (+30)</option>
+                <option value="31">Netherlands (+31)</option>
+                <option value="32">Belgium (+32)</option>
+                <option value="33">France (+33)</option>
+                <option value="34">Spain (+34)</option>
+                <option value="36">Hungary (+36)</option>
+                <option value="39">Italy (+39)</option>
+                <option value="40">Romania (+40)</option>
+                <option value="41">Switzerland (+41)</option>
+                <option value="43">Austria (+43)</option>
+                <option value="44">United Kingdom (+44)</option>
+                <option value="45">Denmark (+45)</option>
+                <option value="46">Sweden (+46)</option>
+                <option value="47">Norway (+47)</option>
+                <option value="48">Poland (+48)</option>
+                <option value="49">Germany (+49)</option>
+                <option value="51">Peru (+51)</option>
+                <option value="52">Mexico (+52)</option>
+                <option value="53">Cuba (+53)</option>
+                <option value="54">Argentina (+54)</option>
+                <option value="55">Brazil (+55)</option>
+                <option value="56">Chile (+56)</option>
+                <option value="57">Colombia (+57)</option>
+                <option value="58">Venezuela (+58)</option>
+                <option value="60">Malaysia (+60)</option>
+                <option value="61">Australia (+61)</option>
+                <option value="62">Indonesia (+62)</option>
+                <option value="63">Philippines (+63)</option>
+                <option value="64">New Zealand (+64)</option>
+                <option value="65">Singapore (+65)</option>
+                <option value="66">Thailand (+66)</option>
+                <option value="81">Japan (+81)</option>
+                <option value="82">South Korea (+82)</option>
+                <option value="84">Vietnam (+84)</option>
+                <option value="86">China (+86)</option>
+                <option value="90">Turkey (+90)</option>
+                <option value="91">India (+91)</option>
+                <option value="92">Pakistan (+92)</option>
+                <option value="93">Afghanistan (+93)</option>
+                <option value="94">Sri Lanka (+94)</option>
+                <option value="95">Myanmar (+95)</option>
+                <option value="98">Iran (+98)</option>
+                <option value="211">South Sudan (+211)</option>
+                <option value="212">Morocco (+212)</option>
+                <option value="213">Algeria (+213)</option>
+                <option value="216">Tunisia (+216)</option>
+                <option value="218">Libya (+218)</option>
+                <option value="220">Gambia (+220)</option>
+                <option value="221">Senegal (+221)</option>
+                <option value="222">Mauritania (+222)</option>
+                <option value="223">Mali (+223)</option>
+                <option value="224">Guinea (+224)</option>
+                <option value="225">Ivory Coast (+225)</option>
+                <option value="226">Burkina Faso (+226)</option>
+                <option value="227">Niger (+227)</option>
+                <option value="228">Togo (+228)</option>
+                <option value="229">Benin (+229)</option>
+                <option value="230">Mauritius (+230)</option>
+                <option value="231">Liberia (+231)</option>
+                <option value="232">Sierra Leone (+232)</option>
+                <option value="233">Ghana (+233)</option>
+                <option value="234">Nigeria (+234)</option>
+                <option value="235">Chad (+235)</option>
+                <option value="248">Seychelles (+248)</option>
+                <option value="249">Sudan (+249)</option>
+                <option value="250">Rwanda (+250)</option>
+                <option value="251">Ethiopia (+251)</option>
+                <option value="252">Somalia (+252)</option>
+                <option value="253">Djibouti (+253)</option>
+                <option value="254">Kenya (+254)</option>
+                <option value="255">Tanzania (+255)</option>
+                <option value="256">Uganda (+256)</option>
+                <option value="257">Burundi (+257)</option>
+                <option value="258">Mozambique (+258)</option>
+                <option value="260">Zambia (+260)</option>
+                <option value="261">Madagascar (+261)</option>
+                <option value="262">Reunion (+262)</option>
+                <option value="263">Zimbabwe (+263)</option>
+                <option value="264">Namibia (+264)</option>
+                <option value="265">Malawi (+265)</option>
+                <option value="266">Lesotho (+266)</option>
+                <option value="267">Botswana (+267)</option>
+                <option value="268">Eswatini (+268)</option>
+                <option value="269">Comoros (+269)</option>
+                <option value="290">Saint Helena (+290)</option>
+                <option value="291">Eritrea (+291)</option>
+                <option value="297">Aruba (+297)</option>
+                <option value="298">Faroe Islands (+298)</option>
+                <option value="299">Greenland (+299)</option>
+                <option value="350">Gibraltar (+350)</option>
+                <option value="351">Portugal (+351)</option>
+                <option value="352">Luxembourg (+352)</option>
+                <option value="353">Ireland (+353)</option>
+                <option value="354">Iceland (+354)</option>
+                <option value="355">Albania (+355)</option>
+                <option value="356">Malta (+356)</option>
+                <option value="357">Cyprus (+357)</option>
+                <option value="358">Finland (+358)</option>
+                <option value="359">Bulgaria (+359)</option>
+                <option value="370">Lithuania (+370)</option>
+                <option value="371">Latvia (+371)</option>
+                <option value="372">Estonia (+372)</option>
+                <option value="373">Moldova (+373)</option>
+                <option value="374">Armenia (+374)</option>
+                <option value="375">Belarus (+375)</option>
+                <option value="376">Andorra (+376)</option>
+                <option value="377">Monaco (+377)</option>
+                <option value="378">San Marino (+378)</option>
+                <option value="379">Vatican City (+379)</option>
+                <option value="380">Ukraine (+380)</option>
+                <option value="381">Serbia (+381)</option>
+                <option value="382">Montenegro (+382)</option>
+                <option value="383">Kosovo (+383)</option>
+                <option value="385">Croatia (+385)</option>
+                <option value="386">Slovenia (+386)</option>
+                <option value="389">North Macedonia (+389)</option>
+                <option value="420">Czech Republic (+420)</option>
+                <option value="421">Slovakia (+421)</option>
+                <option value="423">Liechtenstein (+423)</option>
+                <option value="500">Falkland Islands (+500)</option>
+                <option value="501">Belize (+501)</option>
+                <option value="502">Guatemala (+502)</option>
+                <option value="503">El Salvador (+503)</option>
+                <option value="504">Honduras (+504)</option>
+                <option value="505">Nicaragua (+505)</option>
+                <option value="506">Costa Rica (+506)</option>
+                <option value="507">Panama (+507)</option>
+                <option value="509">Haiti (+509)</option>
+                <option value="590">Guadeloupe (+590)</option>
+                <option value="591">Bolivia (+591)</option>
+                <option value="592">Guyana (+592)</option>
+                <option value="593">Ecuador (+593)</option>
+                <option value="594">French Guiana (+594)</option>
+                <option value="595">Paraguay (+595)</option>
+                <option value="596">Martinique (+596)</option>
+                <option value="597">Suriname (+597)</option>
+                <option value="598">Uruguay (+598)</option>
+                <option value="599">Curacao (+599)</option>
+                <option value="670">East Timor (+670)</option>
+                <option value="672">Antarctica (+672)</option>
+                <option value="673">Brunei (+673)</option>
+                <option value="674">Nauru (+674)</option>
+                <option value="675">Papua New Guinea (+675)</option>
+                <option value="676">Tonga (+676)</option>
+                <option value="677">Solomon Islands (+677)</option>
+                <option value="678">Vanuatu (+678)</option>
+                <option value="679">Fiji (+679)</option>
+                <option value="680">Palau (+680)</option>
+                <option value="681">Wallis and Futuna (+681)</option>
+                <option value="682">Cook Islands (+682)</option>
+                <option value="683">Niue (+683)</option>
+              </select>
+              <input type="number" id="phone" name="phone" placeholder="mobile number" style="flex: 0.7;" pattern="[0-9]{1,14}" required>
+          </div>
+          </div>
+           <!-- end mobile -->
+        
   
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="email" id="registerEmail" class="form-control" name="email" />
+          <input type="email" id="registerEmail" class="form-control" name="email"/>
           <label class="form-label" for="registerEmail">Email</label>
         </div>
-        
+        <!--Address-->
+        <div class="form-outline mb-4">
+          <input type="address" id="registeraddress" class="form-control" name="address"/>
+          <label class="form-label" for="registerUsername">Address</label>
+        </div>
+
+
+  
         <!-- Password input -->
         <div class="form-outline mb-4">
           <input type="password" id="registerPassword" class="form-control" name="password"/>
@@ -352,7 +452,7 @@
   
         <!-- Repeat Password input -->
         <div class="form-outline mb-4">
-          <input type="password" id="registerRepeatPassword" class="form-control" name="repeatpassword" />
+          <input type="password" id="registerRepeatPassword" class="form-control" />
           <label class="form-label" for="registerRepeatPassword">Repeat password</label>
         </div>
   
@@ -366,13 +466,15 @@
         </div>
   
         <!-- Submit button -->
-       <a href="index.html"> <button type="submit" class="btn btn-primary btn-block mb-3" name="register">Sign up</button></a>
+        <button type="submit" class="btn btn-primary btn-block mb-3" name="register">Sign up</button>
       </form>
     </div>
   </div>
   <!-- Pills content -->
     </div>
   </div>
+
+
 
 
 
@@ -463,7 +565,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   </body>
 </html>
-
-
-
-
