@@ -43,7 +43,7 @@ include("connect.php");
 <!-- HEADER SECTION -->
     <section id="nav-bar">
         <nav class="navbar navbar-expand-lg navbar-light ">
-            <a class="navbar-brand" href="index.html"><img src="images/logo.png"class="logo"></a>
+            <a class="navbar-brand" href="index.php"><img src="images/logo.png"class="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -98,7 +98,7 @@ include("connect.php");
                 </li>
 
 <?php
-if (isset($_SESSION["uname"])) {
+if (isset($_SESSION["name"])) {
     echo '<div class="nav-item dropdown show">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="color:black">
                 <img src="images/profile.1024x1024.png" width="24" height="24" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Profile
@@ -221,7 +221,7 @@ if (isset($_SESSION["uname"])) {
                 Days like Mooney Monday, Motivational Monday...
                  </p>
            
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
               
@@ -237,7 +237,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b> Tuesday</b></h4>
             <p class="card-text">Teachers Tuesday aims about bringing teachers togetherand sharing of taught about student community...</p>
             
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
              
@@ -253,7 +253,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b> Wednesday</b></h4>
             <p class="card-text">Wednesday is an interesting day to celevrate days like Wonderful Wednesday, Women's Wednesday... </p>
             
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
           </div>
@@ -267,7 +267,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b>Thursday</b></h4>
             <p class="card-text">Thursdays will carry teaming and all the teams enrolled in Smart cookies will take a turn anddiscuss their...</p>
            
-                  <button type="button" class="btn  btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn  btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
             
@@ -282,7 +282,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b>Friday</b></h4>
             <p class="card-text">Friday aims at bringing all  the days like Farming Friday, Fashion Friday, Fin-Tech Friday, Foodie Friday...</p>
             
-                  <button type="button" class="btn  btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn  btn-outline-primary"><a href="register.php">Read more</a></button>
                   
            
           </div>
@@ -297,7 +297,7 @@ if (isset($_SESSION["uname"])) {
               <h4><b>Saturday</b></h4>
               <p class="card-text">Saturdays aremagical days, full of promise and freedom from the moment you open your eyes inthe morning...</p>
            
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
               
