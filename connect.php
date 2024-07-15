@@ -88,5 +88,3 @@ if (isset($_POST['login'])) {
 
 // Close the database connection
 mysqli_close($conn);
-?>
-?>
