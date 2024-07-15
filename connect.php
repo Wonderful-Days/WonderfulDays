@@ -1,80 +1,95 @@
-
-
 <?php
-
 session_start();
 session_regenerate_id(true);
-// register 
-    error_reporting(0);
-    $servername = "97.74.93.233";
-    $username = "techindi_Develop";
-    $password = "A*-fcV6gaFW0"; 
-    $dbname = "techindi_Dev";
 
-    $conn = mysqli_connect($servername, $username,$password, $dbname );
+// Database connection details
+$servername = "localhost";
+$username = "root";
+$password = "Rahul@1234";
+$dbname = "world";
 
-    if($conn)
-    {
-        // echo "connection ok";
-    }
-    else{
-        die("connection failed".mysqli_connect_error());
-    }
+// Create a connection to the database
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-if(isset($_POST['register']))
-{
-$name = $_POST['name'];
-$username = $_POST['username'];
-$email = $_POST['email'];
-$events = $_POST['events'];     
-$password = $_POST['password'];
-// $repeatpassword = $_POST['repeatpassword'];         
-$sql = "INSERT INTO `register_form`(`Name`, `username`,`events`, `email`, `password`) VALUES ('$name','$username','$events','$email','$password')";
-if(mysqli_query($conn, $sql)){
- echo "<script>alert('new data inserted')</script>";
- $_SESSION["uname"] = $username;
-$_SESSION["desc"] = $events;
-$_SESSION["email"] = $email;
- header('Location: index.php');
+// Check the connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-else{
- echo "<script>alert(' data not inserted')</script>".mysqli_error($conn);
+
+// Registration logic
+if (isset($_POST['register'])) {
+   
+    $name = $_POST['fullName'];
+    $username = $_POST['username'];
+    $country_code = $_POST['country_code'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $address = $_POST['address']; 
+    $password = $_POST['password'];
+
+    // Insert the new participant into the Participants table
+    $sql = "INSERT INTO `tbl_user_basic`(`fullname`, `username`,`country_code`,`phone`, `email`,`address`, `password`) VALUES (?, ?, ?, ?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssssss", $name, $username,$country_code,$phone,$email,$address, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+
+        // Store user session data
+        $_SESSION["userId"] = $data['ID'];
+        $_SESSION["name"] = $name;
+        $_SESSION["userName"] = $username; 
+        $_SESSION["email"] = $email;
+        $_SESSION["country_code"] = $country_code;
+        $_SESSION["phone"] = $phone;
+        $_SESSION["address"] = $address; 
+
+        // Redirect to the index page
+        header('Location: index.php');
+        exit();
+    } else {
+        echo "<script>alert('Error inserting participant: " . $stmt->error . "')</script>";
+        $stmt->close();
+    }
 }
-mysqli_close($conn);
-}                                                              
 
-
-
-// login page
-
-if(!empty($_POST['login']))
-{
+// Login logic
+if (isset($_POST['login'])) {   
     $email = $_POST['email'];
     $password = $_POST['password'];
-                    // syntax: select * from tablename where condition
-        $query = "select * from register_form where email= '$email'";
-                    
-        $result= mysqli_query($conn,$query);
-        $count=mysqli_num_rows($result);
-        if($count>0)
-        { 
-            $data = mysqli_fetch_assoc($result);
-             if($data['password'] == $password){
-                $_SESSION["uname"] = $data['username'];
-                $_SESSION["desc"] = $data['events'];
-                $_SESSION["email"] = $data['email'];
-                header('Location: index.php');
-             }
-         else
-         {
-             echo "<script>alert('wrong password')</script>".mysqli_error($conn);
-         }
-        }
+    $query = "SELECT * FROM tbl_user_basic WHERE email= ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
 
-        else{
-            echo "<script>alert('wrong email/username')</script>".mysqli_error($conn);
-        }
     
- }
+    if ($result->num_rows > 0) {
+        if ($data['password'] == $password) {
+            $_SESSION["userId"] = $data['ID'];
+            $_SESSION["name"] = $data['fullname'];
+            $_SESSION["userName"] = $data['username']; 
+            $_SESSION["email"] = $data['email'];
+            $_SESSION["country_code"] = $$data['country_code'];
+            $_SESSION["phone"] = $data['phone'];
+            $_SESSION["address"] = $data['address'];
+            header('Location: index.php');
+        } else {
+        echo "<script>alert('Wrong password')</script>";
+        header('Location: index.php');
+    }
+    } else {
+        echo "<script>alert('Wrong email/username')</script>";
+        header('Location: index.php');
+    }
 
+    $stmt->close();
+    $stmt2->close();
+    if (isset($stmt3)) $stmt3->close();
+}
+
+// Close the database connection
+mysqli_close($conn);
 ?>

@@ -43,7 +43,7 @@ include("connect.php");
 <!-- HEADER SECTION -->
     <section id="nav-bar">
         <nav class="navbar navbar-expand-lg navbar-light ">
-            <a class="navbar-brand" href="index.html"><img src="images/logo.png"class="logo"></a>
+            <a class="navbar-brand" href="index.php"><img src="images/logo.png"class="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,13 +60,13 @@ include("connect.php");
                     viewBox="0 0 16 16"> Events
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="sunday.html">Sunday</a>
-                    <a class="dropdown-item" href="monday.html">Monday</a>
-                    <a class="dropdown-item" href="tuesday.html">Tuesday</a>
-                    <a class="dropdown-item" href="wendnesday.html">Wednesday</a>
-                    <a class="dropdown-item" href="thursday.html">Thursday</a>
-                    <a class="dropdown-item" href="friday.html">Friday</a>
-                    <a class="dropdown-item" href="saturday.html">Saturday</a>
+                    <a class="dropdown-item" href="sunday.php">Sunday</a>
+                    <a class="dropdown-item" href="monday.php">Monday</a>
+                    <a class="dropdown-item" href="tuesday.php">Tuesday</a>
+                    <a class="dropdown-item" href="wendnesday.php">Wednesday</a>
+                    <a class="dropdown-item" href="thursday.php">Thursday</a>
+                    <a class="dropdown-item" href="friday.php">Friday</a>
+                    <a class="dropdown-item" href="saturday.php">Saturday</a>
                   </div>
                   
                 </li>
@@ -82,7 +82,7 @@ include("connect.php");
                       Review </a>
                 </li>
                 <li class="nav-item act">
-                  <a class="nav-link" style="color:black" href="aboutus.html"><svg
+                  <a class="nav-link" style="color:black" href="aboutus.php"><svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -98,7 +98,7 @@ include("connect.php");
                 </li>
 
 <?php
-if (isset($_SESSION["uname"])) {
+if (isset($_SESSION["name"])) {
     echo '<div class="nav-item dropdown show">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="color:black">
                 <img src="images/profile.1024x1024.png" width="24" height="24" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Profile
@@ -203,7 +203,7 @@ if (isset($_SESSION["uname"])) {
               <h4><b>Sunday</b></h4>
             <p class="card-text">Sunday is to share your Funny and innovative ideas with everyone. Days like Funday-Sundat, InnovationSunday...</p>
             
-                <button type="button" class="btn  btn-outline-primary"><a href="sunday.html">Read more</a></button>
+                <button type="button" class="btn  btn-outline-primary"><a href="sunday.php">Read more</a></button>
                 
               </div>
               
@@ -221,7 +221,7 @@ if (isset($_SESSION["uname"])) {
                 Days like Mooney Monday, Motivational Monday...
                  </p>
            
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
               
@@ -237,7 +237,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b> Tuesday</b></h4>
             <p class="card-text">Teachers Tuesday aims about bringing teachers togetherand sharing of taught about student community...</p>
             
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
              
@@ -253,7 +253,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b> Wednesday</b></h4>
             <p class="card-text">Wednesday is an interesting day to celevrate days like Wonderful Wednesday, Women's Wednesday... </p>
             
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
           </div>
@@ -267,7 +267,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b>Thursday</b></h4>
             <p class="card-text">Thursdays will carry teaming and all the teams enrolled in Smart cookies will take a turn anddiscuss their...</p>
            
-                  <button type="button" class="btn  btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn  btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
             
@@ -282,7 +282,7 @@ if (isset($_SESSION["uname"])) {
             <h4><b>Friday</b></h4>
             <p class="card-text">Friday aims at bringing all  the days like Farming Friday, Fashion Friday, Fin-Tech Friday, Foodie Friday...</p>
             
-                  <button type="button" class="btn  btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn  btn-outline-primary"><a href="register.php">Read more</a></button>
                   
            
           </div>
@@ -297,7 +297,7 @@ if (isset($_SESSION["uname"])) {
               <h4><b>Saturday</b></h4>
               <p class="card-text">Saturdays aremagical days, full of promise and freedom from the moment you open your eyes inthe morning...</p>
            
-                  <button type="button" class="btn btn-outline-primary"><a href="register.html">Read more</a></button>
+                  <button type="button" class="btn btn-outline-primary"><a href="register.php">Read more</a></button>
                   
                 </div>
               
@@ -333,7 +333,7 @@ if (isset($_SESSION["uname"])) {
       of interests. Our commitment to quality and creativity has helped us establish a reputation as a leading 
       event planning company, and we're proud to offer a diverse range of events that cater to all tastes
       and preferences.</b></p>
-      <button class="btn24" href:"aboutus.html">EXPLORE MORE </button>
+      <button class="btn24" href:"aboutus.php">EXPLORE MORE </button>
   </div>
 
 <!--About Us End-->
@@ -366,13 +366,13 @@ if (isset($_SESSION["uname"])) {
         <img class="img-fluid qualities-img " src="images/campusRadio.jfif"   alt="Card image cap">
         <h3>Campus Radio</h3>
         
-        <a href="https://www.startupworld.in/project_radio.html" target="_blank"><button class="btn btn-warning">View details »</button></a>
+        <a href="https://www.startupworld.in/project_radio.php" target="_blank"><button class="btn btn-warning">View details »</button></a>
       </div>
       <div class="col-md-4 text-center products">
         <img class="img-fluid qualities-img " src="images/campusTv.jfif"   alt="Card image cap">
         <h3>Campus Tv</h3>
         
-        <a href="https://smartcookie.in/blog.html" target="_blank"><button class="btn btn-warning">View details »</button></a>
+        <a href="https://smartcookie.in/blog.php" target="_blank"><button class="btn btn-warning">View details »</button></a>
       </div>
       
     </div> -->
@@ -557,7 +557,7 @@ if (isset($_SESSION["uname"])) {
           <div class="row">
               <div class="col-md-4 col-xs-12 sm-center xs-center sm-mb50 xs-mb50">
                   <div class="footer-logo mb20">
-                      <a href="index.html"><img src="images/logo.png" alt=""></a>
+                      <a href="index.php"><img src="images/logo.png" alt=""></a>
                   </div>
                   <div class="footer-about">
                       <p>Smart Cookie believes in the power of youth.</p>
