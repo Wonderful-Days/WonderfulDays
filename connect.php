@@ -18,32 +18,28 @@ if (!$conn) {
 
 // Registration logic
 if (isset($_POST['register'])) {
-   
     $name = $_POST['fullName'];
     $username = $_POST['username'];
     $country_code = $_POST['country_code'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $address = $_POST['address']; 
+    $address = $_POST['address'];
     $password = $_POST['password'];
 
     // Insert the new participant into the Participants table
     $sql = "INSERT INTO `tbl_user_basic`(`fullname`, `username`,`country_code`,`phone`, `email`,`address`, `password`) VALUES (?, ?, ?, ?,?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $name, $username,$country_code,$phone,$email,$address, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $data = $result->fetch_assoc();
-    if ($result->num_rows > 0) {
+    $stmt->bind_param("sssssss", $name, $username, $country_code, $phone, $email, $address, $password);
+
+    if ($stmt->execute()) {
 
         // Store user session data
-        $_SESSION["userId"] = $data['ID'];
         $_SESSION["name"] = $name;
-        $_SESSION["userName"] = $username; 
+        $_SESSION["userName"] = $username;
         $_SESSION["email"] = $email;
         $_SESSION["country_code"] = $country_code;
         $_SESSION["phone"] = $phone;
-        $_SESSION["address"] = $address; 
+        $_SESSION["address"] = $address;
 
         // Redirect to the index page
         header('Location: index.php');
@@ -55,7 +51,7 @@ if (isset($_POST['register'])) {
 }
 
 // Login logic
-if (isset($_POST['login'])) {   
+if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $query = "SELECT * FROM tbl_user_basic WHERE email= ?";
@@ -65,21 +61,21 @@ if (isset($_POST['login'])) {
     $result = $stmt->get_result();
     $data = $result->fetch_assoc();
 
-    
+
     if ($result->num_rows > 0) {
         if ($data['password'] == $password) {
             $_SESSION["userId"] = $data['ID'];
             $_SESSION["name"] = $data['fullname'];
-            $_SESSION["userName"] = $data['username']; 
+            $_SESSION["userName"] = $data['username'];
             $_SESSION["email"] = $data['email'];
             $_SESSION["country_code"] = $$data['country_code'];
             $_SESSION["phone"] = $data['phone'];
             $_SESSION["address"] = $data['address'];
             header('Location: index.php');
         } else {
-        echo "<script>alert('Wrong password')</script>";
-        header('Location: index.php');
-    }
+            echo "<script>alert('Wrong password')</script>";
+            header('Location: index.php');
+        }
     } else {
         echo "<script>alert('Wrong email/username')</script>";
         header('Location: index.php');
@@ -92,4 +88,5 @@ if (isset($_POST['login'])) {
 
 // Close the database connection
 mysqli_close($conn);
+?>
 ?>
