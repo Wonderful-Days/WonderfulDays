@@ -4,6 +4,7 @@
 $baby-blue: #f8faff; */
 
 /* NAVBAR SECTION */
+
 #nav-bar {
     position: sticky;
     top: 0;
@@ -22,7 +23,7 @@ $baby-blue: #f8faff; */
     background-color: white;
 }
 .logo {
-    height: 50px;
+    height: 30px;
     padding-left: 50px;
 }
 

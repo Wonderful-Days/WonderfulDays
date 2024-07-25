@@ -1,5 +1,5 @@
 <?php
-session_start();
+include("connect.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,133 +17,22 @@ session_start();
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
-  <title>About Us</title>
-  <style>
-    .container {
-      position: relative;
-      width: 1160px;
-      display: flex;
-      /* justify-content: center; */
-      flex-wrap: wrap;
-      transform-style: preserve-3d;
-      perspective: 500px;
-      margin: auto;
-    }
-
-    .container .box {
-      position: relative;
-      width: 275px;
-      height: 275px;
-      background: #000;
-      transition: 0.5s;
-      transform-style: preserve-3d;
-      overflow: hidden;
-      margin-right: 15px;
-      margin-top: 45px;
-    }
-
-    /* .container:hover .box {
-  transform: rotateY(25deg);
-} */
-    .container .box:hover~.box {
-      transform: rotateY(-25deg);
-    }
-
-    .container .box:hover {
-      transform: rotateY(0deg) scale(1.25);
-      /* z-index: 1; */
-      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .container .box .imgBx {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .container .box .imgBx:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(180deg, rgb(184, 175, 175), #000);
-      z-index: 1;
-      opacity: 0;
-      transition: 0.5s;
-      mix-blend-mode: multiply;
-    }
-
-    .container .box:hover .imgBx:before {
-      opacity: 1;
-    }
-
-    .container .box .imgBx img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .container .box .content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      display: flex;
-      padding: 20px;
-      align-items: flex-end;
-      box-sizing: border-box;
-    }
-
-    .container .box .content h2 {
-      color: #fff;
-      transition: 0.5s;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-      font-size: 20px;
-      transform: translateY(200px);
-      transition-delay: 0.3s;
-    }
-
-    .container .box:hover .content h2 {
-      transform: translateY(0px);
-    }
-
-    .container .box .content p {
-      color: #fff;
-      transition: 0.5s;
-      font-size: 14px;
-      transform: translateY(200px);
-      transition-delay: 0.4s;
-    }
-
-    .container .box:hover .content p {
-      transform: translateY(0px);
-    }
-
-    .para {
-
-      padding-left: 60px;
-      padding-right: 60px;
-    }
-  </style>
+  <title>Wonderful days</title>
 </head>
 
 <body>
   <!-- HEADER SECTION -->
   <section id="nav-bar">
     <nav class="navbar navbar-expand-lg navbar-light ">
-      <a class="navbar-brand" href="index.php"><img src="images/logo.png" class="logo"></a>
+      <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -155,20 +44,38 @@ session_start();
               <img src="images/how_it_works_logo.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Events
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="sunday.php">Sunday</a>
-              <a class="dropdown-item" href="monday.php">Monday</a>
-              <a class="dropdown-item" href="tuesday.php">Tuesday</a>
-              <a class="dropdown-item" href="wendnesday.php">Wednesday</a>
-              <a class="dropdown-item" href="thursday.php">Thursday</a>
-              <a class="dropdown-item" href="friday.php">Friday</a>
-              <a class="dropdown-item" href="saturday.php">Saturday</a>
+              <a class="dropdown-item" href="sunday.html">Sunday</a>
+              <a class="dropdown-item" href="monday.html">Monday</a>
+              <a class="dropdown-item" href="tuesday.html">Tuesday</a>
+              <a class="dropdown-item" href="wendnesday.html">Wednesday</a>
+              <a class="dropdown-item" href="thursday.html">Thursday</a>
+              <a class="dropdown-item" href="friday.html">Friday</a>
+              <a class="dropdown-item" href="saturday.html">Saturday</a>
             </div>
 
           </li>
 
+          <li class="nav-item act">
+            <a class="nav-link" style="color:black" href="#testimonials">
+              <img src="images/review)logo.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16">
+              Reviews </a>
+          </li>
+
+
+          <!-- //Your Events AFter login Page -->
+
+
+
+
+          <li class="nav-item act">
+            <a class="nav-link" style="color:black" href="aboutus.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16">
+                <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
+                <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+              </svg> About Us </a>
+          </li>
 
           <?php
-          if (isset($_SESSION["name"])) {
+          if (isset($_SESSION["uname"])) {
             echo '<li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" style="color: black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="images/how_it_works_logo.png"
@@ -179,13 +86,11 @@ session_start();
       viewBox="0 0 16 16"> Your Events
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="registeredevents.html">Registered Events </a>
-      <a class="dropdown-item" href="upcomingevents.html">Upcomig Events</a>
+      <a class="dropdown-item" href="upcomingevents.php">Upcomig Events</a>
     </div>
     
   </li>
-
-    <div class="nav-item dropdown show">
+  <div class="nav-item dropdown show">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="color:black">
                 <img src="images/profile.1024x1024.png" width="24" height="24" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Profile
             </a>
@@ -202,108 +107,81 @@ session_start();
           </li>';
           }
           ?>
+
         </ul>
       </div>
     </nav>
   </section>
-  <!--BreadCrum Section Start-->
-
-  <section class="breadcrumbs-section">
-    <div class="container pl-3 p-sm-3">
-      <div class="row jus">
-        <div class="col-12">
-          <!--<h2>Contact Us</h2>-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active">About US</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--Breadcrum Section End-->
-
-  <!--Landing Page Start-->
-  <div class="container my-5 z-depth-1">
-
-    <!--Section: Content-->
-    <section class="p-2 pt-md-4 pb-md-4">
-      <div class="container text-center">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <h2>About Our Days</h2>
-            <br>
-            <p>
-              We are comprised of passionate individuals who are dedicated to making a positive impact in
-              the education system. We believe that the traditional focus on academics alone can limit the
-              potential of students and teachers alike, leading to a lack of appreciation for their talents
-              and achievements.Our goal is not to change the existing education structure, but rather to enhance
-              it by offering new opportunities for growth and development beyond the classroom. We firmly believe
-              that education should be a holistic experience that goes beyond just textbooks and exams.
-            </p>
-            <a href="#more"><button class="btn btn-primary">Read more</button></a>
-          </div>
-          <div class="col-md-6">
-            <img class="img-fluid p-3" src="images/girlGIF.gif" alt="">
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--Section: Content-->
-  </div>
-  <!--Landing Page End-->
 
 
-  <!--Our Team Section Start-->
-  <div class="container">
-    <h2 class="text-center">We have Awesome Team</h2>
-  </div>
-  <div class="container justify-content-around">
-    <div class="box" style="padding-right: 30px;">
-      <div class="imgBx">
-        <img src="images/avikulkarni.png">
+
+  <div style="background-image: url('images/registereventsbackground.jpg'); background-size: cover; background-position: center; position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 style="color: white; font-size: 3em; margin-bottom: 20px; text-align: center;">Your Event Journey</h1>
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; width: 80%; max-width: 800px; display: flex; flex-direction: column; gap: 20px;">
+      <div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+        <h2>Registered Events</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+          <thead>
+            <tr>
+              <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: center;">Number</th>
+              <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: center;">Registered Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">1</td>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Money Monday</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
       </div>
-      <div class="content">
-        <div>
-          <h2>Avinash Kulkarni</h2>
-          <p>Founder & CEO -Smart Cookie. <br>+1 973 551 5593
-          </p>
-        </div>
+      <div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+        <h2>Upcoming Events</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+          <thead>
+            <tr>
+              <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: center;">Event Name</th>
+              <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: center;">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Money Monday</td>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">12/12/2024</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Funday Sunday</td>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">18/06/2024</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
       </div>
-    </div>
-    <div class="box">
-      <div class="imgBx">
-        <img src="images/rakeshkhatri.png">
-      </div>
-      <div class="content">
-        <div>
-          <h2>Rakesh Khatri</h2>
-          <p>CTO - Smart Cookie<br> +91 996 090 3132
-          </p>
-        </div>
+      <div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+        <h2>Oops! You Missed Some Events</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+          <thead>
+            <tr>
+              <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: center;">Registered Events</th>
+              <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: center;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Money Monday</td>
+              <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Absent</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  <!--Out TEam Esction End-->
-  <h2 id="more"></h2>
-  <br><br>
-  <div class="para ">
 
-    <p>In pursuit of this vision, we have developed Campus Radio and Campus TV, two innovative
-      applications that offer a platform for students to showcase their talents, engage with each
-      other, and stay connected with the latest campus news and events. Our applications aim to foster
-      a sense of community among students and provide them with a platform to express them and collaborate
-      on various projects.
-    </p>
-    <p>In addition, we have also developed Smart Cookie, a student-teacher reward application that recognizes
-      and rewards students for their achievements and contributions to the campus community. This application
-      provides an opportunity for students to gain recognition for their hard work and helps to motivate them
-      to achieve their goals.We believe that our applications can bring a revolution in the existing education
-      structure by offering new opportunities for growth and development beyond the classroom. If you share our
-      vision and want to learn more about how our applications can benefit your campus community, please do not
-      hesitate to contact us.</p>
-  </div>
-  <br><Br>
+
+
+
   <!-- Footer Section start -->
   <footer class="footer-area sky-gray-bg padding-bottom padding-top-50 relative wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
     <div class="footer-bottom-area">
@@ -311,7 +189,7 @@ session_start();
         <div class="row">
           <div class="col-md-4 col-xs-12 sm-center xs-center sm-mb50 xs-mb50">
             <div class="footer-logo mb20">
-              <a href="index.php"><img src="images/logo.png" alt=""></a>
+              <a href="index.html"><img src="images/logo.png" alt=""></a>
             </div>
             <div class="footer-about">
               <p>Smart Cookie believes in the power of youth.</p>
@@ -381,12 +259,10 @@ session_start();
   <!--Footer Section End -->
 
 
-
-
-
   <script src="script.js"></script>
 
-
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

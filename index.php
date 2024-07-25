@@ -99,7 +99,23 @@ include("connect.php");
 
 <?php
 if (isset($_SESSION["name"])) {
-    echo '<div class="nav-item dropdown show">
+    echo '<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" style="color: black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="images/how_it_works_logo.png"
+      width="24"
+      height="24"
+      fill="currentColor"
+      class="bi d-flex-row mx-auto mb-1"
+      viewBox="0 0 16 16"> Your Events
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="registeredevents.html">Registered Events </a>
+      <a class="dropdown-item" href="upcomingevents.html">Upcomig Events</a>
+    </div>
+    
+  </li>
+
+    <div class="nav-item dropdown show">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="color:black">
                 <img src="images/profile.1024x1024.png" width="24" height="24" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Profile
             </a>

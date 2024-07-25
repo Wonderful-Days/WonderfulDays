@@ -53,27 +53,29 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <style>
     body {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        background-color: #bfe0f1;
+        background-color: white;
         font-family: Arial, sans-serif;
     }
 
     .profile-box {
         background-color: rgb(239, 237, 240);
         padding: 20px;
+        margin: 50px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
         transition: transform 0.3s, box-shadow 0.3s;
-        max-width: 300px;
+        max-width: 500px;
         width: 100%;
         position: relative;
     }
@@ -157,49 +159,85 @@ mysqli_close($conn);
         background-color: #0056b3;
         transform: scale(1.05);
     }
+
+    .navbar-brand img {
+        height: 55px;
+        width: 200px;
+    }
+
+    #nav-bar {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    @media (min-width: 768px) {
+        .button-63 {
+            font-size: 24px;
+            min-width: 196px;
+        }
+    }
+
+    .navbar {
+        padding: 10px;
+        background-color: white;
+    }
+
+    .logo {
+        height: 30px;
+        padding-left: 50px;
+    }
+
+    .nav-bar .dropdown .dropdown-menu:hover {
+        background-color: black;
+    }
 </style>
 
 <body>
-    <section id="nav-bar">
-        <nav class="navbar navbar-expand-lg navbar-light ">
-            <a class="navbar-brand" href="index.php"><img src="images/logo.png" class="logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div>
+        <section id="nav-bar">
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <a class="navbar-brand" href="index.php"><img src="images/logo.png" class="logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="images/how_it_works_logo.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Events
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="sunday.php">Sunday</a>
-                            <a class="dropdown-item" href="monday.php">Monday</a>
-                            <a class="dropdown-item" href="tuesday.php">Tuesday</a>
-                            <a class="dropdown-item" href="wendnesday.php">Wednesday</a>
-                            <a class="dropdown-item" href="thursday.php">Thursday</a>
-                            <a class="dropdown-item" href="friday.php">Friday</a>
-                            <a class="dropdown-item" href="saturday.php">Saturday</a>
-                        </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="images/how_it_works_logo.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Events
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="sunday.php">Sunday</a>
+                                <a class="dropdown-item" href="monday.php">Monday</a>
+                                <a class="dropdown-item" href="tuesday.php">Tuesday</a>
+                                <a class="dropdown-item" href="wendnesday.php">Wednesday</a>
+                                <a class="dropdown-item" href="thursday.php">Thursday</a>
+                                <a class="dropdown-item" href="friday.php">Friday</a>
+                                <a class="dropdown-item" href="saturday.php">Saturday</a>
+                            </div>
 
-                    </li>
+                        </li>
 
-                    <li class="nav-item act">
-                        <a class="nav-link" style="color:black" href="#testimonials">
-                            <img src="images/review)logo.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16">
-                            Review </a>
-                    </li>
-                    <li class="nav-item act">
-                        <a class="nav-link" style="color:black" href="aboutus.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16">
-                                <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
-                                <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            </svg> About Us </a>
-                    </li>
+                        <li class="nav-item act">
+                            <a class="nav-link" style="color:black" href="#testimonials">
+                                <img src="images/review)logo.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16">
+                                Review </a>
+                        </li>
+                        <li class="nav-item act">
+                            <a class="nav-link" style="color:black" href="aboutus.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16">
+                                    <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
+                                    <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg> About Us </a>
+                        </li>
 
-                    <?php
-                    if (isset($_SESSION["name"])) {
-                        echo '<div class="nav-item dropdown show">
+                        <?php
+                        if (isset($_SESSION["name"])) {
+                            echo '<div class="nav-item dropdown show">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="color:black">
                 <img src="images/profile.1024x1024.png" width="24" height="24" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Profile
             </a>
@@ -208,19 +246,20 @@ mysqli_close($conn);
                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
           </div>';
-                    } else {
-                        echo '<li class="nav-item act">
+                        } else {
+                            echo '<li class="nav-item act">
             <a class="nav-link" style="color:black" href="register.php">
                 <img src="images/register.1024x1024.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Register
             </a>
           </li>';
-                    }
-                    ?>
+                        }
+                        ?>
 
-                </ul>
-            </div>
-        </nav>
-    </section>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+    </div>
     <div class="profile-box">
         <img src="images/profile.1024x1024.png" alt="Profile Photo" class="profile-photo">
         <?php

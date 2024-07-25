@@ -168,27 +168,30 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <style>
     body {
         margin: 20px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #bfe0f1;
+        background-color: white;
         font-family: Arial, sans-serif;
     }
 
     .form-box {
         background-color: rgb(239, 237, 240);
+        margin: 50px;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
         transition: transform 0.3s, box-shadow 0.3s;
-        max-width: 400px;
+        max-width: 500px;
         width: 100%;
         position: relative;
     }
@@ -251,6 +254,41 @@ $conn->close();
         max-height: 80vh;
         overflow-y: auto;
     }
+
+    .navbar-brand img {
+        height: 55px;
+        width: 200px;
+    }
+
+    #nav-bar {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    @media (min-width: 768px) {
+        .button-63 {
+            font-size: 24px;
+            min-width: 196px;
+        }
+    }
+
+    .navbar {
+        padding: 10px;
+        background-color: white;
+    }
+
+    .logo {
+        height: 30px;
+        padding-left: 50px;
+    }
+
+    .nav-bar .dropdown .dropdown-menu:hover {
+        background-color: black;
+    }
 </style>
 
 <body>
@@ -293,7 +331,23 @@ $conn->close();
 
                     <?php
                     if (isset($_SESSION["name"])) {
-                        echo '<div class="nav-item dropdown show">
+                        echo '<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" style="color: black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="images/how_it_works_logo.png"
+      width="24"
+      height="24"
+      fill="currentColor"
+      class="bi d-flex-row mx-auto mb-1"
+      viewBox="0 0 16 16"> Your Events
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="registeredevents.html">Registered Events </a>
+      <a class="dropdown-item" href="upcomingevents.html">Upcomig Events</a>
+    </div>
+    
+  </li>
+
+    <div class="nav-item dropdown show">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="color:black">
                 <img src="images/profile.1024x1024.png" width="24" height="24" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Profile
             </a>

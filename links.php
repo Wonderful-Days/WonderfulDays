@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -64,10 +67,41 @@
                 <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
               </svg> About Us </a>
           </li>
-          <li class="nav-item act">
+          <?php
+          if (isset($_SESSION["name"])) {
+            echo '<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" style="color: black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="images/how_it_works_logo.png"
+      width="24"
+      height="24"
+      fill="currentColor"
+      class="bi d-flex-row mx-auto mb-1"
+      viewBox="0 0 16 16"> Your Events
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="registeredevents.html">Registered Events </a>
+      <a class="dropdown-item" href="upcomingevents.html">Upcomig Events</a>
+    </div>
+    
+  </li>
+
+    <div class="nav-item dropdown show">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="color:black">
+                <img src="images/profile.1024x1024.png" width="24" height="24" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="profile.php">View Profile</a></li>
+                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            </ul>
+          </div>';
+          } else {
+            echo '<li class="nav-item act">
             <a class="nav-link" style="color:black" href="register.php">
-              <img src="images/register.1024x1024.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Register </a>
-          </li>
+                <img src="images/register.1024x1024.png" width="24" height="24" fill="currentColor" class="bi d-flex-row mx-auto mb-1" viewBox="0 0 16 16"> Register
+            </a>
+          </li>';
+          }
+          ?>
         </ul>
       </div>
     </nav>
