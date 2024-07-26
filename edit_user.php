@@ -60,6 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_user'])) {
 </head>
 
 <body>
+    <div class="navbar">
+        <img src="logo.png" alt="Logo">
+        <button class="admin-btn">Admin Page</button>
+    </div>
+
     <h1><?php echo $update ? 'Update User' : 'Create User'; ?></h1>
     <form method="POST" action="">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ''; ?>">
