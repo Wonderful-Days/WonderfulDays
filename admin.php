@@ -11,31 +11,18 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Retrieve user details with their events concatenated
-$user_query = "
-    SELECT 
-        u.ID, u.fullname, u.username, u.email, u.country_code, u.phone, u.address, 
-        ud.college_id, ud.company_name, ud.designation,
-        GROUP_CONCAT(e.title SEPARATOR ', ') AS events_registered
-    FROM tbl_user_basic u
-    LEFT JOIN tbl_user_detail ud ON u.ID = ud.user_basic_id
-    LEFT JOIN tbl_user_event ue ON u.ID = ue.user_basic_id
-    LEFT JOIN tbl_events e ON ue.events_ID = e.ID
-    GROUP BY u.ID
-";
-$user_result = mysqli_query($conn, $user_query);
 
-// Retrieve event details
-$event_query = "SELECT * FROM tbl_events";
-$event_result = mysqli_query($conn, $event_query);
+// Retrieve total number of registered users
+$user_count_query = "SELECT COUNT(*) as total_users FROM tbl_user_basic";
+$user_count_result = mysqli_query($conn, $user_count_query);
+$user_count_row = mysqli_fetch_assoc($user_count_result);
+$total_users = $user_count_row['total_users'];
 
-// Retrieve email log details
-$email_log_query = "SELECT * FROM tbl_email_log";
-$email_log_result = mysqli_query($conn, $email_log_query);
-
-// Retrieve SMS log details
-$sms_log_query = "SELECT * FROM tbl_sms_log";
-$sms_log_result = mysqli_query($conn, $sms_log_query);
+// Retrieve total number of events
+$event_count_query = "SELECT COUNT(*) as total_events FROM tbl_events";
+$event_count_result = mysqli_query($conn, $event_count_query);
+$event_count_row = mysqli_fetch_assoc($event_count_result);
+$total_events = $event_count_row['total_events'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +50,6 @@ $sms_log_result = mysqli_query($conn, $sms_log_query);
 
         .navbar img {
             height: 60px;
-            width: 60px;
             padding-left: 40px;
         }
 
@@ -151,7 +137,7 @@ $sms_log_result = mysqli_query($conn, $sms_log_query);
 <body>
     <!-- Navbar -->
     <div class="navbar">
-        <a href="#"><img src="logo.png" alt="Logo"></a>
+        <img src="./images/logo.png" alt="Logo">
         <h2>Dashboard</h2>
         <a href="adminLogout.php">Log Out</a>
     </div>
@@ -162,8 +148,10 @@ $sms_log_result = mysqli_query($conn, $sms_log_query);
         <div class="sidebar">
             <a class="nav-link" href="user_details.php">User Details</a>
             <a class="nav-link" href="event_details.php">Event Details</a>
-            <a class="nav-link" href="#">Email Logs</a>
-            <a class="nav-link" href="#">Sms Log</a>
+            <a class="nav-link" href="email_log.php">Email Logs</a>
+            <a class="nav-link" href="sms_log.php">Sms Log</a>
+            <a class="nav-link" href="sendEmail.php">Send Email</a>
+            <a class="nav-link" href="sendSms.php">Send Sms</a>
         </div>
 
         <!-- Content -->
@@ -171,15 +159,11 @@ $sms_log_result = mysqli_query($conn, $sms_log_query);
             <div class="stat-grid">
                 <div class="stat-box">
                     <h5>Total Registered Users</h5> <!-- count from user table -->
-                    <p>250</p>
+                    <p><?php echo $total_users; ?></p>
                 </div>
                 <div class="stat-box">
                     <h5>Total Events</h5> <!-- count from events table -->
-                    <p>100</p>
-                </div>
-                <div class="stat-box">
-                    <h5>Total Employes</h5> <!-- count from admin table -->
-                    <p>100</p>
+                    <p><?php echo $total_events; ?></p>
                 </div>
                 <!-- <div class="stat-box">
                     <h5>Total logged user</h5>

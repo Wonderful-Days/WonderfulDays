@@ -33,8 +33,16 @@ if (isset($_POST['register'])) {
 
     if ($stmt->execute()) {
 
+        $query = "SELECT * FROM tbl_user_basic WHERE email= ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
+
         // Store user session data
         $_SESSION["name"] = $name;
+        $_SESSION["userId"] = $data['ID'];
         $_SESSION["userName"] = $username;
         $_SESSION["email"] = $email;
         $_SESSION["country_code"] = $country_code;

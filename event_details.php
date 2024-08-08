@@ -22,7 +22,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_event'])) {
     exit;
 }
 
+// Set the number of records to display per page
+$records_per_page = 10;
+
+// Get the current page number from the query string, default is 1 if not set
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Calculate the offset for the SQL query
+$offset = ($current_page - 1) * $records_per_page;
+
+// Get the search query from the form, if it exists
+$search_query = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Get the total number of records
+$total_records_query = "SELECT COUNT(*) AS total FROM tbl_events";
+if ($search_query) {
+    $total_records_query .= " WHERE mstevent_event_name LIKE '%$search_query%' OR title LIKE '%$search_query%' OR description LIKE '%$search_query%' OR speaker LIKE '%$search_query%' OR eventtype LIKE '%$search_query%'";
+}
+$total_records_result = mysqli_query($conn, $total_records_query);
+$total_records = mysqli_fetch_assoc($total_records_result)['total'];
+
+// Calculate total pages
+$total_pages = ceil($total_records / $records_per_page);
+
+// Modify the query to include LIMIT and OFFSET, and the search condition
 $event_query = "SELECT * FROM tbl_events";
+if ($search_query) {
+    $event_query .= " WHERE mstevent_event_name LIKE '%$search_query%' OR title LIKE '%$search_query%' OR description LIKE '%$search_query%' OR speaker LIKE '%$search_query%' OR eventtype LIKE '%$search_query%'";
+}
+$event_query .= " LIMIT $records_per_page OFFSET $offset";
 $event_result = mysqli_query($conn, $event_query);
 ?>
 
@@ -103,10 +131,9 @@ $event_result = mysqli_query($conn, $event_query);
         }
 
         .main {
-            margin: 5%;
             margin-top: 2%;
-            background-color: rgba(128, 128, 128, 0.385);
-            width: 80%;
+            background-color: white;
+            width: 100%;
             padding: 12px;
             border-radius: 25px;
             position: relative;
@@ -153,7 +180,7 @@ $event_result = mysqli_query($conn, $event_query);
             text-align: center;
             padding: 0 12px 0;
             border-radius: 25px;
-        } */
+            } */
 
         .btn2 {
             background-color: blue;
@@ -208,7 +235,7 @@ $event_result = mysqli_query($conn, $event_query);
             padding: 0 12px 0;
             border-radius: 25px;
             color: white;
-        } */
+         } */
 
         table {
             width: 100%;
@@ -262,6 +289,67 @@ $event_result = mysqli_query($conn, $event_query);
                 text-align: left;
             }
         }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        .pagination-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .page-info {
+            font-size: 16px;
+        }
+
+        #createEventForm form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        #createEventForm label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        #createEventForm input,
+        #createEventForm textarea,
+        #createEventForm button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #createEventForm button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #createEventForm button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 
@@ -276,8 +364,15 @@ $event_result = mysqli_query($conn, $event_query);
     </nav>
 
     <h1>Events Details</h1>
+
+    <!-- Search Form -->
+    <form method="GET" action="" style="text-align: center; margin-bottom: 20px;">
+        <input type="text" name="search" placeholder="Search events" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+        <button type="submit">Search</button>
+    </form>
+
     <div class="main1">
-        <button onclick="document.getElementById('createEventForm').style.display='block'" class="btn1">Create Event</button>
+        <a href="create_events.php" class="btn1">Create Event</a>
     </div>
     <div class="main">
         <table>
@@ -316,7 +411,9 @@ $event_result = mysqli_query($conn, $event_query);
                                 <input type="hidden" name="id" value="<?php echo $event_row['ID']; ?>">
                                 <button type="submit" name="delete_event">Delete</button>
                             </form>
-                            <a href="edit_event.php?id=<?php echo $event_row['ID']; ?>">Update</a>
+                            <button>
+                                <a href="edit_event.php?id=<?php echo $event_row['ID']; ?>">Update</a>
+                            </button>
                         </td>
                     </tr>
                 <?php } ?>
@@ -324,29 +421,18 @@ $event_result = mysqli_query($conn, $event_query);
         </table>
     </div>
 
-    <!-- Create Event Form -->
-    <div id="createEventForm" style="display:none;">
-        <form method="POST" action="edit_event.php">
-            <input type="hidden" name="create_event" value="1">
-            <label for="mst_event_ID">Master Event ID:</label>
-            <input type="number" name="mst_event_ID" id="mst_event_ID" required><br>
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title" required><br>
-            <label for="description">Description:</label>
-            <textarea name="description" id="description" required></textarea><br>
-            <label for="speaker">Speaker:</label>
-            <input type="text" name="speaker" id="speaker" required><br>
-            <label for="onlinelink">Link:</label>
-            <input type="text" name="onlinelink" id="onlinelink" required><br>
-            <label for="dateofevent">Date:</label>
-            <input type="datetime-local" name="dateofevent" id="dateofevent" required><br>
-            <label for="capacity">Capacity:</label>
-            <input type="number" name="capacity" id="capacity" required><br>
-            <label for="eventtype">Event Type:</label>
-            <input type="text" name="eventtype" id="eventtype" required><br>
-            <button type="submit">Create Event</button>
-        </form>
+    <div class="pagination">
+        <?php if ($current_page > 1) : ?>
+            <a href="?page=<?php echo $current_page - 1; ?>&search=<?php echo $search_query; ?>" class="pagination-btn prev">Previous</a>
+        <?php endif; ?>
+
+        <span class="page-info">Page <?php echo $current_page; ?> of <?php echo $total_pages; ?></span>
+
+        <?php if ($current_page < $total_pages) : ?>
+            <a href="?page=<?php echo $current_page + 1; ?>&search=<?php echo $search_query; ?>" class="pagination-btn next">Next</a>
+        <?php endif; ?>
     </div>
+
 </body>
 
 </html>

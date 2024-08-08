@@ -268,6 +268,9 @@ mysqli_close($conn);
 <div class="details">
     <p><strong>Bio: </strong>' . (isset($user_detail_row["bio_short_desc"]) ? $user_detail_row["bio_short_desc"] : 'Not available') . '</p>
     <p><strong>Address: </strong>' . (isset($user_basic_row["address"]) ? $user_basic_row["address"] : 'Not available') . '</p>
+    <p><strong>State: </strong>' . (isset($user_basic_row["state"]) ? $user_basic_row["state"] : 'Not available') . '</p>
+    <p><strong>Country: </strong>' . (isset($user_basic_row["country"]) ? $user_basic_row["country"] : 'Not available') . '</p>
+    <p><strong>Zipcode: </strong>' . (isset($user_basic_row["zipcode"]) ? $user_basic_row["zipcode"] : 'Not available') . '</p>
     
     <p><strong>Registered Events:</strong>' . implode(', ', $event_names) . '</p>
     <p><strong>Email:</strong> ' . (isset($user_basic_row["email"]) ? $user_basic_row["email"] : 'Not available') . '</p>

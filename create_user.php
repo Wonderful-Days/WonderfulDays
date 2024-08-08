@@ -33,42 +33,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_user'])) {
     mysqli_query($conn, $query);
 }
 
-// Search functionality
-$search = '';
-if (isset($_GET['search'])) {
-    $search = mysqli_real_escape_string($conn, $_GET['search']);
-}
-
-// Pagination settings
-$limit = 10; // Number of entries per page
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-$start = ($page - 1) * $limit;
-
-// Retrieve user details with their events concatenated and applying search
+// Retrieve user details with their events concatenated
 $user_query = "
     SELECT 
-        u.ID, u.fullname, u.username, u.email, u.country_code, u.phone, u.address, u.state, u.country, u.zipcode, 
+        u.ID, u.fullname, u.username, u.email, u.country_code, u.phone, u.address, 
         ud.college_id, ud.company_name, ud.designation,
         GROUP_CONCAT(e.title SEPARATOR ', ') AS events_registered
     FROM tbl_user_basic u
     LEFT JOIN tbl_user_detail ud ON u.ID = ud.user_basic_id
     LEFT JOIN tbl_user_event ue ON u.ID = ue.user_basic_id
     LEFT JOIN tbl_events e ON ue.events_ID = e.ID
-    WHERE u.fullname LIKE '%$search%' OR u.username LIKE '%$search%' OR u.email LIKE '%$search%'
     GROUP BY u.ID
-    LIMIT $start, $limit
 ";
 $user_result = mysqli_query($conn, $user_query);
-
-// Count total records for pagination
-$count_query = "
-    SELECT COUNT(*) AS total 
-    FROM tbl_user_basic u
-    WHERE u.fullname LIKE '%$search%' OR u.username LIKE '%$search%' OR u.email LIKE '%$search%'
-";
-$count_result = mysqli_query($conn, $count_query);
-$total_records = mysqli_fetch_assoc($count_result)['total'];
-$total_pages = ceil($total_records / $limit);
 ?>
 
 <!DOCTYPE html>
@@ -148,8 +125,10 @@ $total_pages = ceil($total_records / $limit);
         }
 
         .main {
+            margin: 5%;
             margin-top: 2%;
-            background-color: white;
+            background-color: rgba(128, 128, 128, 0.385);
+            width: 80%;
             padding: 12px;
             border-radius: 25px;
             position: relative;
@@ -157,14 +136,9 @@ $total_pages = ceil($total_records / $limit);
         }
 
         .main1 {
-            display: flex;
             margin: 2%;
             padding: 2px;
             border-radius: 25px;
-        }
-
-        .main1 div {
-            margin-right: 50px;
         }
 
         .btn1 {
@@ -242,76 +216,8 @@ $total_pages = ceil($total_records / $limit);
             background-color: darkblue;
         }
 
-        /* .btn3 {
-            position: relative;
-            background-color: transparent;
-            border: 1px solid black;
-            font-size: 18px;
-            text-transform: bold;
-            transition: color 400ms;
-            margin-left: 20%;
-            background-color: rgba(82, 78, 78, 0.686);
-            width: 50px;
-            text-align: center;
-            padding: 0 12px 0;
-            border-radius: 25px;
-            color: white;
-        } */
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px auto;
-        }
-
-        th,
-        td {
-            border: 1px solid #0f0f0f;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        @media screen and (max-width: 768px) {
-
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
-            }
-
-            thead tr {
-                display: none;
-            }
-
-            tr {
-                margin-bottom: 15px;
-            }
-
-            td {
-                text-align: right;
-                padding-left: 50%;
-                position: relative;
-            }
-
-            td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 0;
-                width: 50%;
-                padding-left: 15px;
-                font-weight: bold;
-                text-align: left;
-            }
-        }
-
         #createUserForm form {
+            margin-top: 20px;
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
@@ -346,25 +252,6 @@ $total_pages = ceil($total_records / $limit);
         #createUserForm button:hover {
             background-color: #45a049;
         }
-
-        .pagination {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .pagination a {
-            color: blue;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            margin: 0 4px;
-        }
-
-        .pagination a.active {
-            background-color: blue;
-            color: white;
-            border: 1px solid blue;
-        }
     </style>
 </head>
 
@@ -378,78 +265,49 @@ $total_pages = ceil($total_records / $limit);
         </div>
     </nav>
 
-    <h1>User Details</h1>
+    <br>
+    <br>
+    <!-- Create User Form -->
+    <div id="createUserForm">
+        <form method=" POST" action="">
+            <h2>Create User</h2>
+            <label for="fullname">Full Name:</label>
+            <input type="text" name="fullname" required>
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+            <label for="country_code">Country Code:</label>
+            <select name="country_code" required>
+                <option value="1">+1 (USA)</option>
+                <option value="44">+44 (UK)</option>
+                <option value="91">+91 (India)</option>
+                <option value="61">+61 (Australia)</option>
+                <option value="49">+49 (Germany)</option>
+                <option value="33">+33 (France)</option>
+                <option value="39">+39 (Italy)</option>
+                <option value="55">+55 (Brazil)</option>
+                <option value="81">+81 (Japan)</option>
+                <option value="86">+86 (China)</option>
+                <option value="27">+27 (South Africa)</option>
+                <option value="82">+82 (South Korea)</option>
+                <option value="34">+34 (Spain)</option>
+                <option value="90">+90 (Turkey)</option>
+                <option value="62">+62 (Indonesia)</option>
+                <option value="971">+971 (United Arab Emirates)</option>
+                <option value="66">+66 (Thailand)</option>
+                <option value="92">+92 (Pakistan)</option>
+                <option value="48">+48 (Poland)</option>
+                <option value="98">+98 (Iran)</option>
+                <!-- Add more country codes as needed -->
+            </select>
 
-    <div class="main1">
-        <div>
-            <a href="create_user.php" class="btn2">CreateUser</a>
-        </div>
-        <div>
-            <form method="GET" action="">
-                <input type="text" name="search" placeholder="Search by name, username, or email" value="<?php echo htmlspecialchars($search); ?>">
-                <button type="submit" class="btn1">Search</button>
-            </form>
-        </div>
-
-    </div>
-
-    <div class="main">
-        <table>
-            <thead>
-                <tr>
-                    <th>Sr No.</th>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Country Code</th>
-                    <th>Phone Number</th>
-                    <th>Events Registered</th>
-                    <th>College ID</th>
-                    <th>Company Name</th>
-                    <th>Designation</th>
-                    <th>Address</th>
-                    <th>State</th>
-                    <th>Country</th>
-                    <th>Zipcode</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $i = 1 + $start;
-                while ($user_row = mysqli_fetch_assoc($user_result)) { ?>
-                    <tr>
-                        <td data-label='Sr no.'><?php echo $i;
-                                                $i++; ?></td>
-                        <td data-label='Name'><?php echo $user_row['fullname']; ?></td>
-                        <td data-label='Username'><?php echo $user_row['username']; ?></td>
-                        <td data-label='Email'><?php echo $user_row['email']; ?></td>
-                        <td data-label='Country Code'><?php echo $user_row['country_code']; ?></td>
-                        <td data-label='Phone Number'><?php echo $user_row['phone']; ?></td>
-                        <td data-label='Events Registered'><?php echo $user_row['events_registered']; ?></td>
-                        <td data-label='College ID'><?php echo $user_row['college_id']; ?></td>
-                        <td data-label='Company Name'><?php echo $user_row['company_name']; ?></td>
-                        <td data-label='Designation'><?php echo $user_row['designation']; ?></td>
-                        <td data-label='Address'><?php echo $user_row['address']; ?></td>
-                        <td data-label='State'><?php echo $user_row['state']; ?></td>
-                        <td data-label='Country'><?php echo $user_row['country']; ?></td>
-                        <td data-label='Zipcode'><?php echo $user_row['zipcode']; ?></td>
-                        <td data-label='Actions'>
-                            <form method="POST" action="" style="display:inline;">
-                                <input type="hidden" name="id" value="<?php echo $user_row['ID']; ?>">
-                                <button type="submit" name="delete_user">Delete</button>
-                            </form>
-                            <button><a href="edit_user.php?id=<?php echo $user_row['ID']; ?>">Update</a></button>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-
-        <div class="pagination">
-            <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
-                <a href="?search=<?php echo urlencode($search); ?>&page=<?php echo $i; ?>" class="<?php echo ($page == $i) ? 'active' : ''; ?>"><?php echo $i; ?></a>
-            <?php } ?>
-        </div>
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" required>
+            <label for="address">Address:</label>
+            <input type="text" name="address" required>
+            <button type="submit" name="create_user">Create User</button>
+        </form>
     </div>
 </body>
 

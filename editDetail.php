@@ -55,9 +55,9 @@ while ($row = mysqli_fetch_assoc($registered_events_result)) {
 // If the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Update user details in the database
-    $update_sql = "UPDATE tbl_user_basic SET fullname =?, address =?, email =?, phone =?, country_code =? WHERE ID =?";
+    $update_sql = "UPDATE tbl_user_basic SET fullname =?, address =?,state =?, country =?,zipcode =?, email =?, phone =?, country_code =? WHERE ID =?";
     $update_stmt = $conn->prepare($update_sql);
-    $update_stmt->bind_param("sssssi", $_POST["fullname"], $_POST["address"], $_POST["email"], $_POST["phone"], $_POST["country_code"], $_SESSION["userId"]);
+    $update_stmt->bind_param("ssssisssi", $_POST["fullname"], $_POST["address"], $_POST["state"], $_POST["country"], $_POST["zipcode"], $_POST["email"], $_POST["phone"], $_POST["country_code"], $_SESSION["userId"]);
     $update_stmt->execute();
     echo "<script>alert('hello')</script>";
 
@@ -136,6 +136,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION["fullname"] = $_POST["fullname"];
     $_SESSION["bio_short_desc"] = $_POST["bio_short_desc"];
     $_SESSION["address"] = $_POST["address"];
+    $_SESSION["state"] = $_POST["state"];
+    $_SESSION["country"] = $_POST["country"];
+    $_SESSION["zipcode"] = $_POST["zipcode"];
     $_SESSION["email"] = $_POST["email"];
     $_SESSION["phone"] = $_POST["phone"];
     $_SESSION["country_code"] = $_POST["country_code"];
@@ -380,12 +383,39 @@ $conn->close();
 
             <label>Address:</label>
             <input type="text" name="address" class="input-field" value="<?php echo htmlspecialchars($user_basic_row["address"] ?? ''); ?>" placeholder="Address"><br><br>
+            <label>State:</label>
+            <input type="text" name="state" class="input-field" value="<?php echo htmlspecialchars($user_basic_row["state"] ?? ''); ?>" placeholder="State"><br><br>
+            <label>Country:</label>
+            <input type="text" name="country" class="input-field" value="<?php echo htmlspecialchars($user_basic_row["country"] ?? ''); ?>" placeholder="Country"><br><br>
+            <label>Zipcode:</label>
+            <input type="number" name="zipcode" class="input-field" value="<?php echo htmlspecialchars($user_basic_row["zipcode"] ?? ''); ?>" placeholder="Zipcode"><br><br>
 
             <label>Email:</label>
             <input type="email" name="email" class="input-field" value="<?php echo htmlspecialchars($user_basic_row["email"] ?? ''); ?>" placeholder="Email"><br><br>
 
-            <label>Country Code:</label>
-            <input type="text" name="country_code" class="input-field" value="<?php echo htmlspecialchars($user_basic_row["country_code"] ?? ''); ?>" placeholder="Country Code"><br><br>
+            <label for="country_code">Country Code:</label>
+            <select name="country_code" required>
+                <option value="1" <?php echo ($user_basic_row["country_code"] == '1') ? 'selected' : ''; ?>>+1 (USA)</option>
+                <option value="44" <?php echo ($user_basic_row["country_code"] == '44') ? 'selected' : ''; ?>>+44 (UK)</option>
+                <option value="91" <?php echo ($user_basic_row["country_code"] == '91') ? 'selected' : ''; ?>>+91 (India)</option>
+                <option value="61" <?php echo ($user_basic_row["country_code"] == '61') ? 'selected' : ''; ?>>+61 (Australia)</option>
+                <option value="49" <?php echo ($user_basic_row["country_code"] == '49') ? 'selected' : ''; ?>>+49 (Germany)</option>
+                <option value="33" <?php echo ($user_basic_row["country_code"] == '33') ? 'selected' : ''; ?>>+33 (France)</option>
+                <option value="39" <?php echo ($user_basic_row["country_code"] == '39') ? 'selected' : ''; ?>>+39 (Italy)</option>
+                <option value="55" <?php echo ($user_basic_row["country_code"] == '55') ? 'selected' : ''; ?>>+55 (Brazil)</option>
+                <option value="81" <?php echo ($user_basic_row["country_code"] == '81') ? 'selected' : ''; ?>>+81 (Japan)</option>
+                <option value="86" <?php echo ($user_basic_row["country_code"] == '86') ? 'selected' : ''; ?>>+86 (China)</option>
+                <option value="27" <?php echo ($user_basic_row["country_code"] == '27') ? 'selected' : ''; ?>>+27 (South Africa)</option>
+                <option value="82" <?php echo ($user_basic_row["country_code"] == '82') ? 'selected' : ''; ?>>+82 (South Korea)</option>
+                <option value="34" <?php echo ($user_basic_row["country_code"] == '34') ? 'selected' : ''; ?>>+34 (Spain)</option>
+                <option value="90" <?php echo ($user_basic_row["country_code"] == '90') ? 'selected' : ''; ?>>+90 (Turkey)</option>
+                <option value="62" <?php echo ($user_basic_row["country_code"] == '62') ? 'selected' : ''; ?>>+62 (Indonesia)</option>
+                <option value="971" <?php echo ($user_basic_row["country_code"] == '971') ? 'selected' : ''; ?>>+971 (United Arab Emirates)</option>
+                <option value="66" <?php echo ($user_basic_row["country_code"] == '66') ? 'selected' : ''; ?>>+66 (Thailand)</option>
+                <option value="92" <?php echo ($user_basic_row["country_code"] == '92') ? 'selected' : ''; ?>>+92 (Pakistan)</option>
+                <option value="48" <?php echo ($user_basic_row["country_code"] == '48') ? 'selected' : ''; ?>>+48 (Poland)</option>
+                <option value="98" <?php echo ($user_basic_row["country_code"] == '98') ? 'selected' : ''; ?>>+98 (Iran)</option>
+            </select>
 
             <label>Phone Number:</label>
             <input type="text" name="phone" class="input-field" value="<?php echo htmlspecialchars($user_basic_row["phone"] ?? ''); ?>" placeholder="Phone Number"><br><br>
