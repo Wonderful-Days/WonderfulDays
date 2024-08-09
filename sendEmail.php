@@ -4,68 +4,48 @@ if (!isset($_SESSION["admin"])) {
     exit;
 }
 
-// Database connection
 $servername = "localhost";
 $username = "root";
 $password = "Rahul@1234";
 $dbname = "world";
 
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM tbl_events_master";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->get_result();
-$events = array();
-while ($event_row = $result->fetch_assoc()) {
-    $events[] = $event_row;
+// Search functionality
+$search = '';
+if (isset($_GET['search'])) {
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
 }
 
-if (isset($_POST['send_email'])) {
-    $event_id = filter_input(INPUT_POST, 'event_id', FILTER_SANITIZE_NUMBER_INT);
-    $sender_email = filter_input(INPUT_POST, 'sender_email', FILTER_SANITIZE_EMAIL);
-    $mail_body = htmlspecialchars($_POST['mail_body'], ENT_QUOTES, 'UTF-8');
+// Pagination settings
+$limit = 10; // Number of entries per page
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$start = ($page - 1) * $limit;
 
-    if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
-        // Fetch the users who have registered for the selected event
-        $sql = "SELECT ub.email 
-                FROM tbl_user_event ue
-                JOIN tbl_user_basic ub ON ue.user_basic_ID = ub.ID
-                WHERE ue.events_ID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $event_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+// Retrieve email logs with search and pagination
+$sql = "SELECT * FROM tbl_email_log 
+        WHERE recipient_email LIKE '%$search%' 
+        OR mail_subject LIKE '%$search%' 
+        OR sender_email LIKE '%$search%' 
+        LIMIT $start, $limit";
+$result = $conn->query($sql);
 
-        // Send emails to all users
-        $emails_sent = 0;
-        while ($row = $result->fetch_assoc()) {
-            $to = $row['email'];
-            $subject = "Event Notification";
-
-            // Use the PHP mail function to send the email
-            if (mail($to, $subject, $mail_body, "From:" . $sender_email)) {
-                $emails_sent++;
-            } else {
-                echo "Failed to send email to " . $to . "<br>";
-            }
-        }
-
-        echo "$emails_sent email(s) sent successfully!";
-        $stmt->close();
-    } else {
-        echo "Invalid sender email address!";
-    }
-}
-
-$conn->close();
+// Count total records for pagination
+$count_sql = "SELECT COUNT(*) AS total 
+              FROM tbl_email_log 
+              WHERE recipient_email LIKE '%$search%' 
+              OR mail_subject LIKE '%$search%' 
+              OR sender_email LIKE '%$search%'";
+$count_result = $conn->query($count_sql);
+$total_records = $count_result->fetch_assoc()['total'];
+$total_pages = ceil($total_records / $limit);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +53,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Mail</title>
+    <title>Email Logs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,7 +66,7 @@ $conn->close();
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #333;
+            background-color: #d3d1ec;
             color: #fff;
             padding: 10px 20px;
         }
@@ -96,7 +76,7 @@ $conn->close();
         }
 
         .navbar .admin-btn {
-            background-color: #fff;
+            background-color: #555;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -109,7 +89,7 @@ $conn->close();
         }
 
         .container {
-            max-width: 600px;
+            max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -122,78 +102,178 @@ $conn->close();
             color: #333;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="email"],
-        textarea {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        input[type="email"]:focus,
-        textarea:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        .send-btn {
+        .create-btn {
+            display: block;
+            margin: 20px 0;
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #28a745;
             color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
-            align-self: center;
         }
 
-        .send-btn:hover {
+        .create-btn:hover {
+            background-color: #218838;
+        }
+
+        .email-logs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .email-logs-table th,
+        .email-logs-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .email-logs-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .email-logs-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .email-logs-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        .actions{
+            display: flex;
+        }
+
+        .actions .edit-btn,
+        .actions .delete-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 5px;
+        }
+
+        .actions .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .actions .edit-btn:hover {
             background-color: #0056b3;
         }
+
+        .actions .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page-btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .page-btn:hover {
+            background-color: #555;
+        }
+        .searchbtn{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            gap: 20px;
+        }
+        .searchbtn input[name="search"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+}
+
+.searchbtn input[name="search"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+
     </style>
 </head>
 
 <body>
     <div class="navbar">
-        <img src="../images/logo.png" alt="Logo" class="logo">
-        <button class="admin-btn"><a href="admin.php">Admin Page</a></button>
+        <img src="./images/logo.png" alt="Logo" class="logo">
+        <a href="admin.php" class="admin-btn">Admin Page</a>
     </div>
 
     <div class="container">
-        <h1>Send Mail</h1>
-        <form method="POST" action="">
-            <label for="event_id">Select Event:</label>
-            <select name="event_id" id="event_id" required>
-                <option value="">Select Event</option>
+        <h1>Email Logs</h1>
+        <form method="GET" action="" class="searchbtn">
+            <input type="text" name="search" placeholder="Search by email, subject, or sender" value="<?php echo htmlspecialchars($search); ?>">
+            <button type="submit" class="create-btn">Search</button>
+        </form>
+        <table class="email-logs-table">
+            <thead>
+                <tr>
+                    <th>Event ID</th>
+                    <th>User Basic ID</th>
+                    <th>Recipient Email</th>
+                    <th>Mail Subject</th>
+                    <th>Mail Body</th>
+                    <th>Sent Status</th>
+                    <th>Sent Datetime</th>
+                    <th>Sender Email</th>
+                    <th>Error Message</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
-
-                foreach ($events as $event) {
-                    echo "<option value='" . $event['ID'] . "'>" . $event['event_name'] . "</option>";
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                                <td>{$row['events_ID']}</td>
+                                <td>{$row['user_basic_ID']}</td>
+                                <td>{$row['recipient_email']}</td>
+                                <td>{$row['mail_subject']}</td>
+                                <td>{$row['mail_body']}</td>
+                                <td>{$row['sent_status']}</td>
+                                <td>{$row['sent_datetime']}</td>
+                                <td>{$row['sender_email']}</td>
+                                <td>{$row['error_message']}</td>
+                                <td class='actions'>
+                                    <button class='edit-btn'>Edit</button>
+                                    <button class='delete-btn'>Delete</button>
+                                </td>
+                              </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='10'>No records found</td></tr>";
                 }
                 ?>
-            </select>
-
-            <label for="sender_email">Sender Email:</label>
-            <input type="email" name="sender_email" id="sender_email" value="<?php echo $_SESSION["admin_email"] ?>" required>
-
-            <label for="mail_body">Mail Body:</label>
-            <textarea name="mail_body" id="mail_body" rows="6" required></textarea>
-
-            <button type="submit" name="send_email" class="send-btn">Send</button>
-        </form>
-
+            </tbody>
+        </table>
+        <div class="pagination">
+            <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+                <a href="?search=<?php echo urlencode($search); ?>&page=<?php echo $i; ?>" class="page-btn <?php echo ($page == $i) ? 'active' : ''; ?>"><?php echo $i; ?></a>
+            <?php } ?>
+        </div>
     </div>
 </body>
 
 </html>
+
+<?php
+$conn->close();
+?>
