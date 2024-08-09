@@ -156,17 +156,6 @@ $total_pages = ceil($total_records / $limit);
             overflow: hidden;
         }
 
-        .main1 {
-            display: flex;
-            margin: 2%;
-            padding: 2px;
-            border-radius: 25px;
-        }
-
-        .main1 div {
-            margin-right: 50px;
-        }
-
         .btn1 {
             background-color: blue;
             position: relative;
@@ -257,6 +246,23 @@ $total_pages = ceil($total_records / $limit);
             border-radius: 25px;
             color: white;
         } */
+
+
+        .main1 {
+    display: flex;
+    align-items: center;
+    gap: 20px;  /* Space between "Create User" button, search box, and search button */
+    padding: 10px;
+    border-radius: 25px;
+}
+
+input[name="search"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;  /* Adjust the width as needed */
+}
+
 
         table {
             width: 100%;
@@ -365,6 +371,33 @@ $total_pages = ceil($total_records / $limit);
             color: white;
             border: 1px solid blue;
         }
+
+        .user-action-section {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background color for the section */
+    border-radius: 10px;
+    margin: 20px 0; /* Space above and below the section */
+    text-align: center;
+}
+
+.user-action-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between "Create User" button, search box, and search button */
+    text-align: center;
+}
+
+input[name="search"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;  /* Adjust the width as needed */
+}
+.search-form{
+    display: flex;
+    padding-left: 20%;
+}
+
     </style>
 </head>
 
@@ -380,18 +413,17 @@ $total_pages = ceil($total_records / $limit);
 
     <h1>User Details</h1>
 
-    <div class="main1">
-        <div>
-            <a href="create_user.php" class="btn2">CreateUser</a>
-        </div>
-        <div>
-            <form method="GET" action="">
+    <section class="user-action-section">
+        <div class="user-action-container">
+            <a href="create_user.php" class="btn2">Create User</a>
+            <form method="GET" action="" class="search-form">
                 <input type="text" name="search" placeholder="Search by name, username, or email" value="<?php echo htmlspecialchars($search); ?>">
                 <button type="submit" class="btn1">Search</button>
             </form>
         </div>
-
-    </div>
+    </section>
+    
+    
 
     <div class="main">
         <table>
