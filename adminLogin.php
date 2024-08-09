@@ -28,10 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the user exists in the database
     $query = "SELECT * FROM tbl_admin WHERE full_name='$username' AND password='$password'";
     $result = mysqli_query($conn, $query);
+    $data = $result->fetch_assoc();
 
     if (mysqli_num_rows($result) == 1) {
         // Set session variables and redirect to the admin dashboard
         $_SESSION['admin'] = $username;
+        $_SESSION['admin_email'] = $data["email_id"];
         header("Location: admin.php");
         exit();
     } else {
