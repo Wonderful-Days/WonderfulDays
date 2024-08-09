@@ -140,11 +140,6 @@ $event_result = mysqli_query($conn, $event_query);
             overflow: hidden;
         }
 
-        .main1 {
-            margin: 2%;
-            padding: 2px;
-            border-radius: 25px;
-        }
 
         .btn1 {
             background-color: blue;
@@ -350,6 +345,39 @@ $event_result = mysqli_query($conn, $event_query);
         #createEventForm button:hover {
             background-color: #45a049;
         }
+        .user-action-section {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background color for the section */
+    border-radius: 10px;
+    margin: 20px 0; /* Space above and below the section */
+    text-align: center;
+}
+
+.user-action-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between "Create User" button, search box, and search button */
+    text-align: center;
+}
+        
+input[name="search"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;  /* Adjust the width as needed */
+}
+.search-form{
+    display: flex;
+    padding-left: 20%;
+}
+
+
+input[name="search"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;  /* Adjust the width as needed */
+}
     </style>
 </head>
 
@@ -364,16 +392,15 @@ $event_result = mysqli_query($conn, $event_query);
     </nav>
 
     <h1>Events Details</h1>
-
-    <!-- Search Form -->
-    <form method="GET" action="" style="text-align: center; margin-bottom: 20px;">
-        <input type="text" name="search" placeholder="Search events" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-        <button type="submit">Search</button>
-    </form>
-
-    <div class="main1">
-        <a href="create_events.php" class="btn1">Create Event</a>
-    </div>
+    <section class="user-action-section">
+        <div class="user-action-container">
+            <a href="create_user.php" class="btn2">Create User</a>
+            <form method="GET" action="" class="search-form">
+                <input type="text" name="search" placeholder="Search by name, username, or email" value="<?php echo htmlspecialchars($search); ?>">
+                <button type="submit" class="btn1">Search</button>
+            </form>
+        </div>
+    </section>
     <div class="main">
         <table>
             <thead>
