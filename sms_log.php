@@ -179,6 +179,16 @@ $total_pages = ceil($total_records / $limit);
         .page-btn:hover {
             background-color: #555;
         }
+        .actions{
+            display: flex;
+        }
+
+        .searchbtn{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            gap: 30px;
+        }
     </style>
 </head>
 
@@ -190,7 +200,7 @@ $total_pages = ceil($total_records / $limit);
 
     <div class="container">
         <h1>SMS Logs</h1>
-        <form method="GET" action="">
+        <form method="GET" action="" class="searchbtn">
             <input type="text" name="search" placeholder="Search by phone number or SMS body" value="<?php echo htmlspecialchars($search); ?>">
             <button type="submit" class="create-btn">Search</button>
         </form>
