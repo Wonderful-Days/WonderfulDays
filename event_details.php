@@ -314,7 +314,6 @@ $event_result = mysqli_query($conn, $event_query);
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #f9f9f9;
         }
@@ -345,39 +344,51 @@ $event_result = mysqli_query($conn, $event_query);
         #createEventForm button:hover {
             background-color: #45a049;
         }
+
         .user-action-section {
-    padding: 20px;
-    background-color: #f8f9fa; /* Light background color for the section */
-    border-radius: 10px;
-    margin: 20px 0; /* Space above and below the section */
-    text-align: center;
-}
+            padding: 20px;
+            background-color: #f8f9fa;
+            /* Light background color for the section */
+            border-radius: 10px;
+            margin: 20px 0;
+            /* Space above and below the section */
+            text-align: center;
+        }
 
-.user-action-container {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* Space between "Create User" button, search box, and search button */
-    text-align: center;
-}
-        
-input[name="search"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 250px;  /* Adjust the width as needed */
-}
-.search-form{
-    display: flex;
-    padding-left: 20%;
-}
+        .user-action-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            /* Space between "Create User" button, search box, and search button */
+            text-align: center;
+        }
+
+        input[name="search"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            /* Adjust the width as needed */
+        }
+
+        .search-form {
+            display: flex;
+            padding-left: 20%;
+        }
 
 
-input[name="search"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 250px;  /* Adjust the width as needed */
-}
+        input[name="search"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            /* Adjust the width as needed */
+        }
+
+        .actionbtn {
+            display: flex;
+            gap: 2px;
+        }
     </style>
 </head>
 
@@ -394,9 +405,9 @@ input[name="search"] {
     <h1>Events Details</h1>
     <section class="user-action-section">
         <div class="user-action-container">
-            <a href="create_user.php" class="btn2">Create User</a>
+            <a href="create_events.php" class="btn2">Create Event</a>
             <form method="GET" action="" class="search-form">
-                <input type="text" name="search" placeholder="Search by name, username, or email" value="<?php echo htmlspecialchars($search); ?>">
+                <input type="text" name="search" placeholder="Search by name, username, or email" value="<?php echo isset($search_query) ? htmlspecialchars($search_query) : ''; ?>">
                 <button type="submit" class="btn1">Search</button>
             </form>
         </div>
@@ -434,13 +445,16 @@ input[name="search"] {
                         <td data-label='Event Type'><?php echo $event_row['eventtype']; ?></td>
                         <td data-label='Updated On'><?php echo $event_row['updatedon']; ?></td>
                         <td data-label='Actions'>
-                            <form method="POST" action="" style="display:inline;">
-                                <input type="hidden" name="id" value="<?php echo $event_row['ID']; ?>">
-                                <button type="submit" name="delete_event">Delete</button>
-                            </form>
-                            <button>
-                                <a href="edit_event.php?id=<?php echo $event_row['ID']; ?>">Update</a>
-                            </button>
+                            <div class="actionbtn">
+                                <form method="POST" action="">
+                                    <input type="hidden" name="id" value="<?php echo $event_row['ID']; ?>">
+                                    <button type="submit" name="delete_event">Delete</button>
+                                </form>
+                                <button>
+                                    <a href="edit_event.php?id=<?php echo $event_row['ID']; ?>">Update</a>
+                                </button>
+
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>

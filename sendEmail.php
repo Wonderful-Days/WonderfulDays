@@ -1,13 +1,23 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 session_start();
 if (!isset($_SESSION["admin"])) {
     exit;
 }
 
+// Database connection parameters
 $servername = "localhost";
 $username = "root";
 $password = "Rahul@1234";
 $dbname = "world";
+
+// Include PHPMailer files
+require 'C:/Users/Rahul/OneDrive/Desktop/WonderfulDays/vendor/phpmailer/phpmailer/src/Exception.php';
+require 'C:/Users/Rahul/OneDrive/Desktop/WonderfulDays/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'C:/Users/Rahul/OneDrive/Desktop/WonderfulDays/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -17,34 +27,92 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Search functionality
-$search = '';
-if (isset($_GET['search'])) {
-    $search = mysqli_real_escape_string($conn, $_GET['search']);
+// Fetch events from the database
+$sql = "SELECT * FROM tbl_events_master";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+$events = array();
+if ($result->num_rows > 0) {
+    while ($event_row = $result->fetch_assoc()) {
+        $events[] = $event_row;
+    }
+} else {
+    echo "No events found.<br>"; // Debug message
 }
 
-// Pagination settings
-$limit = 10; // Number of entries per page
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-$start = ($page - 1) * $limit;
+$successMessage = "";
+$errorMessage = "";
+$emailsSentList = array(); // Array to store successfully sent emails
 
-// Retrieve email logs with search and pagination
-$sql = "SELECT * FROM tbl_email_log 
-        WHERE recipient_email LIKE '%$search%' 
-        OR mail_subject LIKE '%$search%' 
-        OR sender_email LIKE '%$search%' 
-        LIMIT $start, $limit";
-$result = $conn->query($sql);
+if (isset($_POST['send_email'])) {
+    $event_id = filter_input(INPUT_POST, 'event_id', FILTER_SANITIZE_NUMBER_INT);
+    $sender_email = filter_input(INPUT_POST, 'sender_email', FILTER_SANITIZE_EMAIL);
+    $mail_body = htmlspecialchars($_POST['mail_body'], ENT_QUOTES, 'UTF-8');
 
-// Count total records for pagination
-$count_sql = "SELECT COUNT(*) AS total 
-              FROM tbl_email_log 
-              WHERE recipient_email LIKE '%$search%' 
-              OR mail_subject LIKE '%$search%' 
-              OR sender_email LIKE '%$search%'";
-$count_result = $conn->query($count_sql);
-$total_records = $count_result->fetch_assoc()['total'];
-$total_pages = ceil($total_records / $limit);
+    if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
+        // Fetch the users who have registered for the selected event
+        $sql = "SELECT ue.user_basic_ID, ub.email, ub.username 
+                FROM tbl_user_event ue
+                JOIN tbl_user_basic ub ON ue.user_basic_ID = ub.ID
+                WHERE ue.events_ID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $event_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $users = $result->fetch_all(MYSQLI_ASSOC); // Fetch all users into an array
+
+        if (count($users) > 0) {
+
+            // Initialize PHPMailer
+            $mail = new PHPMailer(true);
+
+            // SMTP configuration
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  // Set the SMTP server to send through
+            $mail->SMTPAuth = true;
+            $mail->Username = 'mail id';  // SMTP username
+            $mail->Password = 'app password';    // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 587;
+
+            // Set sender details
+            $mail->setFrom($sender_email, 'Event Organizer');
+
+            // Send emails to all users
+            $emails_sent = 0;
+            foreach ($users as $row) {
+                try {
+                    $mail->addAddress($row['email'], $row['username']); // Add a recipient
+                    $mail->isHTML(true);  // Set email format to HTML
+                    $mail->Subject = 'Event Notification';
+                    $mail->Body = $mail_body;
+
+                    $mail->send();
+                    $emailsSentList[] = $row['email']; // Store the successfully sent email
+                    $emails_sent++;
+                } catch (Exception $e) {
+                    echo "Failed to send email to " . $row['email'] . " Error: " . $mail->ErrorInfo . "<br>";
+                }
+
+                // Clear all recipients for the next iteration
+                $mail->clearAddresses();
+            }
+            if ($emails_sent > 0) {
+                $successMessage = "$emails_sent email(s) sent successfully!";
+            } else {
+                $errorMessage = "No emails were sent.";
+            }
+        } else {
+            $errorMessage = "No users found for the selected event.";
+        }
+        $stmt->close();
+    } else {
+        echo "Invalid sender email address!";
+    }
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +121,7 @@ $total_pages = ceil($total_records / $limit);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Logs</title>
+    <title>Send Email</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,7 +134,7 @@ $total_pages = ceil($total_records / $limit);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #d3d1ec;
+            background-color: #4A90E2;
             color: #fff;
             padding: 10px 20px;
         }
@@ -89,7 +157,7 @@ $total_pages = ceil($total_records / $limit);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -102,6 +170,49 @@ $total_pages = ceil($total_records / $limit);
             color: #333;
         }
 
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #4A90E2;
+            outline: none;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+        }
+
+        .send-btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .send-btn:hover {
+            background-color: #218838;
+        }
+
         .create-btn {
             display: block;
             margin: 20px 0;
@@ -112,6 +223,7 @@ $total_pages = ceil($total_records / $limit);
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-align: center;
         }
 
         .create-btn:hover {
@@ -143,7 +255,8 @@ $total_pages = ceil($total_records / $limit);
         .email-logs-table tr:hover {
             background-color: #f1f1f1;
         }
-        .actions{
+
+        .actions {
             display: flex;
         }
 
@@ -189,25 +302,55 @@ $total_pages = ceil($total_records / $limit);
         .page-btn:hover {
             background-color: #555;
         }
-        .searchbtn{
+
+        .searchbtn {
             display: flex;
             justify-content: center;
             text-align: center;
             gap: 20px;
         }
+
         .searchbtn input[name="search"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 250px;
-}
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+        }
 
-.searchbtn input[name="search"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
+        .searchbtn input[name="search"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
 
+        .message-container {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            /* Green background for success */
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
 
+        .message-container.error {
+            background-color: #dc3545;
+            /* Red background for error */
+        }
+
+        .close-btn {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            margin-left: 20px;
+        }
     </style>
 </head>
 
@@ -218,62 +361,64 @@ $total_pages = ceil($total_records / $limit);
     </div>
 
     <div class="container">
-        <h1>Email Logs</h1>
-        <form method="GET" action="" class="searchbtn">
-            <input type="text" name="search" placeholder="Search by email, subject, or sender" value="<?php echo htmlspecialchars($search); ?>">
-            <button type="submit" class="create-btn">Search</button>
+        <h1>Send Mail</h1>
+        <form method="POST" action="">
+            <label for="event_id">Select Event:</label>
+            <select name="event_id" id="event_id" required>
+                <option value="">Select Event</option>
+                <?php foreach ($events as $event) : ?>
+                    <option value="<?php echo $event['ID']; ?>"><?php echo $event['event_name']; ?></option>
+                <?php endforeach; ?>
+            </select>
+
+            <label for="sender_email">Sender Email:</label>
+            <input type="email" name="sender_email" id="sender_email" value="<?php echo isset($_SESSION["admin_email"]) ? $_SESSION["admin_email"] : ''; ?>" required>
+
+            <label for="mail_body">Mail Body:</label>
+            <textarea name="mail_body" id="mail_body" rows="6" required></textarea>
+
+            <button type="submit" name="send_email" class="send-btn">Send</button>
         </form>
-        <table class="email-logs-table">
-            <thead>
-                <tr>
-                    <th>Event ID</th>
-                    <th>User Basic ID</th>
-                    <th>Recipient Email</th>
-                    <th>Mail Subject</th>
-                    <th>Mail Body</th>
-                    <th>Sent Status</th>
-                    <th>Sent Datetime</th>
-                    <th>Sender Email</th>
-                    <th>Error Message</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td>{$row['events_ID']}</td>
-                                <td>{$row['user_basic_ID']}</td>
-                                <td>{$row['recipient_email']}</td>
-                                <td>{$row['mail_subject']}</td>
-                                <td>{$row['mail_body']}</td>
-                                <td>{$row['sent_status']}</td>
-                                <td>{$row['sent_datetime']}</td>
-                                <td>{$row['sender_email']}</td>
-                                <td>{$row['error_message']}</td>
-                                <td class='actions'>
-                                    <button class='edit-btn'>Edit</button>
-                                    <button class='delete-btn'>Delete</button>
-                                </td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='10'>No records found</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-        <div class="pagination">
-            <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
-                <a href="?search=<?php echo urlencode($search); ?>&page=<?php echo $i; ?>" class="page-btn <?php echo ($page == $i) ? 'active' : ''; ?>"><?php echo $i; ?></a>
-            <?php } ?>
+
+        <!-- Display the success/error message -->
+        <div id="messageContainer" class="message-container <?php echo !empty($errorMessage) ? 'error' : ''; ?>">
+            <?php
+            if (!empty($successMessage)) {
+                echo $successMessage;
+            } elseif (!empty($errorMessage)) {
+                echo $errorMessage;
+            }
+            ?>
+            <button class="close-btn" onclick="closeMessage()">×</button>
         </div>
+
+        <!-- Display the list of successfully sent emails -->
+        <?php if (!empty($emailsSentList)) : ?>
+            <h2>Emails Sent to the Following Users:</h2>
+            <ul>
+                <?php foreach ($emailsSentList as $email) : ?>
+                    <li><?php echo $email; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+
     </div>
+
+    <script>
+        // Show the message container if there's a message
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageContainer = document.getElementById('messageContainer');
+            if (messageContainer.innerHTML.trim() !== '') {
+                messageContainer.style.display = 'block';
+            }
+        });
+
+        // Function to close the message container
+        function closeMessage() {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
-
-<?php
-$conn->close();
-?>

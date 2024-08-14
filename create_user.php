@@ -17,11 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_user'])) {
     $fullname = $_POST['fullname'];
     $username = $_POST['username'];
     $email = $_POST['email'];
+    $password = $_POST['password'];
     $country_code = $_POST['country_code'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
 
-    $query = "INSERT INTO tbl_user_basic (fullname, username, email, country_code, phone, address) VALUES ('$fullname', '$username', '$email', '$country_code', '$phone', '$address')";
+    $query = "INSERT INTO tbl_user_basic (fullname, username, email, country_code, phone, address,password) VALUES ('$fullname', '$username', '$email', '$country_code', '$phone', '$address','$password')";
     mysqli_query($conn, $query);
 }
 
@@ -234,6 +235,7 @@ $user_result = mysqli_query($conn, $user_query);
 
         #createUserForm input,
         #createUserForm textarea,
+        #createUserForm select,
         #createUserForm button {
             width: 100%;
             padding: 10px;
@@ -269,7 +271,7 @@ $user_result = mysqli_query($conn, $user_query);
     <br>
     <!-- Create User Form -->
     <div id="createUserForm">
-        <form method=" POST" action="">
+        <form method="POST" action="">
             <h2>Create User</h2>
             <label for="fullname">Full Name:</label>
             <input type="text" name="fullname" required>
@@ -277,6 +279,8 @@ $user_result = mysqli_query($conn, $user_query);
             <input type="text" name="username" required>
             <label for="email">Email:</label>
             <input type="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
             <label for="country_code">Country Code:</label>
             <select name="country_code" required>
                 <option value="1">+1 (USA)</option>

@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_user'])) {
         $query = "INSERT INTO tbl_user_basic (fullname, username, email, country_code, phone, address) VALUES ('$fullname', '$username', '$email', '$country_code', '$phone', '$address')";
     }
     mysqli_query($conn, $query);
-    header("Location: main_file.php");
+    header("Location: user_details.php");
 }
 ?>
 <!DOCTYPE html>
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_user'])) {
 
 <body>
     <div class="navbar">
-        <img src="logo.png" alt="Logo">
+        <img src="../images/logo.png" alt="Logo">
         <button class="admin-btn">Admin Page</button>
     </div>
 
@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_user'])) {
         <input type="text" name="phone" value="<?php echo $phone; ?>" required>
         <label for="address">Address:</label>
         <input type="text" name="address" value="<?php echo $address; ?>" required>
-        <button type="submit" name="save_user"><?php echo $update ? 'Update User' : 'Create User'; ?>Submit</button>
+        <button type="submit" name="save_user"><?php echo $update ? 'Update User' : 'Create User'; ?></button>
     </form>
 </body>
 
