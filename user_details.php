@@ -249,19 +249,21 @@ $total_pages = ceil($total_records / $limit);
 
 
         .main1 {
-    display: flex;
-    align-items: center;
-    gap: 20px;  /* Space between "Create User" button, search box, and search button */
-    padding: 10px;
-    border-radius: 25px;
-}
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            /* Space between "Create User" button, search box, and search button */
+            padding: 10px;
+            border-radius: 25px;
+        }
 
-input[name="search"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 250px;  /* Adjust the width as needed */
-}
+        input[name="search"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            /* Adjust the width as needed */
+        }
 
 
         table {
@@ -373,31 +375,35 @@ input[name="search"] {
         }
 
         .user-action-section {
-    padding: 20px;
-    background-color: #f8f9fa; /* Light background color for the section */
-    border-radius: 10px;
-    margin: 20px 0; /* Space above and below the section */
-    text-align: center;
-}
+            padding: 20px;
+            background-color: #f8f9fa;
+            /* Light background color for the section */
+            border-radius: 10px;
+            margin: 20px 0;
+            /* Space above and below the section */
+            text-align: center;
+        }
 
-.user-action-container {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* Space between "Create User" button, search box, and search button */
-    text-align: center;
-}
+        .user-action-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            /* Space between "Create User" button, search box, and search button */
+            text-align: center;
+        }
 
-input[name="search"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 250px;  /* Adjust the width as needed */
-}
-.search-form{
-    display: flex;
-    padding-left: 20%;
-}
+        input[name="search"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            /* Adjust the width as needed */
+        }
 
+        .search-form {
+            display: flex;
+            padding-left: 20%;
+        }
     </style>
 </head>
 
@@ -422,8 +428,8 @@ input[name="search"] {
             </form>
         </div>
     </section>
-    
-    
+
+
 
     <div class="main">
         <table>
